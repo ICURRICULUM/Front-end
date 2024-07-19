@@ -2,6 +2,7 @@ import React from "react";
 import NameInput from "./NameInput";
 import MajorInput from "./MajorInput";
 import Pen from "../../assets/signUp/pen.svg";
+import DropDown from "./DropDown";
 
 const SignForm = () => {
   const majorItems = [
@@ -27,14 +28,10 @@ const SignForm = () => {
           <NameInput />
         </div>
         <div className="mb-[20px]">
-          <MajorInput
-            title={"학번"}
-            data={SIDItems}
-            msg={"학번을 선택하세요."}
-          />
+          <DropDown title={"학번"} data={SIDItems} msg={"학번을 선택하세요."} />
         </div>
         <div className="mb-[20px]">
-          <MajorInput
+          <DropDown
             title={"전공"}
             data={majorItems}
             msg={"주전공 학과를 선택하세요."}
