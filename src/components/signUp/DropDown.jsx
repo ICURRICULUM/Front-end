@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import OpenArr from "../../assets/signUp/openArr.svg";
 import CloseArr from "../../assets/signUp/closeArr.svg";
 
-const DropDown = ({ title, data, msg }) => {
+const DropDown = ({ title, data, selectValue, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSelect, setIsSelect] = useState(msg);
 
   const showMenu = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
 
-  const selectItem = (item) => {
+  const selectItem = (e) => {
     setIsOpen(!isOpen);
-    setIsSelect(item);
+    onSelect(e);
   };
 
   return (
@@ -28,9 +27,10 @@ const DropDown = ({ title, data, msg }) => {
         <div
           className="w-[320px] h-[48px] border-solid border rounded-[5px] border-[#757575] 
       py-[12px] pl-[17px] pr-[12px] text-[14px] text-[#757575] font-[400] flex justify-between items-center"
+          onClick={showMenu}
         >
-          <span>{isSelect}</span>
-          <button onClick={showMenu}>
+          <span>{selectValue}</span>
+          <button>
             <img src={isOpen ? CloseArr : OpenArr} />
           </button>
         </div>
