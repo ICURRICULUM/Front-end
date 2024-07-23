@@ -26,13 +26,13 @@ const DropDown = ({ title, data, selectValue, onSelect }) => {
       <div>
         <div
           className="w-[320px] h-[48px] border-solid border rounded-[5px] border-[#757575] 
-      py-[12px] pl-[17px] pr-[12px] text-[14px] text-[#757575] font-[400] flex justify-between items-center"
+      py-[12px] pl-[17px] pr-[12px] text-[14px] text-[#757575] font-[400] flex justify-between items-center cursor-pointer"
           onClick={showMenu}
         >
           <span>{selectValue}</span>
-          <button>
+          <div>
             <img src={isOpen ? CloseArr : OpenArr} />
-          </button>
+          </div>
         </div>
         <div
           className={`${
