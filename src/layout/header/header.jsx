@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="flex flex-row items-center justify-between w-full px-10 shadow-header">
+    <div className="relative z-10 flex flex-row items-center justify-between w-full px-10 shadow-header">
       <Link to="/">
         <img src={InhaLogo} />
       </Link>
