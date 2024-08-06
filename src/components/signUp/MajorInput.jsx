@@ -1,6 +1,6 @@
 import React from "react";
 
-const MajorInput = ({ title, data, msg }) => {
+const MajorInput = ({ title, data, msg, values, setValues }) => {
   return (
     <div className="flex flex-col">
       <label>
