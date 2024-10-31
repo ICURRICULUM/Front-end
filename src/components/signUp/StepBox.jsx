@@ -1,9 +1,8 @@
-import React from "react";
 import StepItem from "./StepItem";
-import EmailImg from "../../assets/signUp/email.svg";
-import InfoImg from "../../assets/signUp/info.svg";
-import HappyImg from "../../assets/signUp/happy.svg";
-import rightArrImg from "../../assets/signUp/rightArr.svg";
+import EmailImg from "@assets/signUp/email.svg";
+import InfoImg from "@assets/signUp/info.svg";
+import HappyImg from "@assets/signUp/happy.svg";
+import rightArrImg from "@assets/signUp/rightArr.svg";
 
 const StepBox = () => {
   return (

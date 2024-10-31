@@ -1,7 +1,7 @@
 import React from "react";
 import NameInput from "./NameInput";
 import MajorInput from "./MajorInput";
-import Pen from "../../assets/signUp/pen.svg";
+import Pen from "@assets/signUp/pen.svg";
 
 const SignForm = () => {
   const majorItems = [
