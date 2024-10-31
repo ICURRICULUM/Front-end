@@ -1,6 +1,5 @@
-import React from "react";
-import StepBox from "../../components/signUp/StepBox";
-import SignForm from "../../components/signUp/SignForm";
+import StepBox from "@components/signUp/StepBox";
+import SignForm from "@components/signUp/SignForm";
 
 const signUpPage = () => {
   return (

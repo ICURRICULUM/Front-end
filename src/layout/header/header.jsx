@@ -4,7 +4,7 @@ import Logo from "@assets/logo.svg";
 
 const Header = () => {
   return (
-    <div className="relative z-10 flex flex-row items-center justify-between w-full px-10 shadow-header">
+    <div className="fixed top-0 left-0 z-10 flex flex-row items-center justify-between w-full px-10 bg-white shadow-header">
       <Link to="/">
         <img src={Logo} />
       </Link>
