@@ -28,7 +28,9 @@
       "@axios/*": ["axios/*"],
       "@components/*": ["components/*"],
       "@layout/*": ["layout/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@server/*": ["server/*"],
+      "@zustand/*": ["zustand/*"]
     }
   },
   "include": ["src", "custom.d.ts"]
