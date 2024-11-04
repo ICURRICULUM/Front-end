@@ -1,12 +1,13 @@
 import { useState } from "react";
 
+import { dummyData } from "./dummyData";
+
 import NavBar from "@components/enterCourse/navBar";
 import MyCourseComponent from "@components/enterCourse/myCourse";
 
-import { dummyData } from "./dummyData";
-
 import LeftArrow from "@assets/enterCourse/leftArrow.svg";
 import RightArrow from "@assets/enterCourse/rightArrow.svg";
+
 
 const EnterCoursePage = () => {
   const stepItem = [
@@ -31,9 +32,9 @@ const EnterCoursePage = () => {
   };
 
   return (
-    <div className="pt-40 mb-10">
-      <p className="text-2xl text-center mb-10">수강 이력 입력</p>
-      <div className="bg-[#F5F5F5] py-10 flex flex-col items-center space-y-10">
+    <div className="mb-10 pt-40">
+      <p className="mb-10 text-center text-2xl">수강 이력 입력</p>
+      <div className="flex flex-col items-center space-y-10 bg-[#F5F5F5] py-10">
         <p className="">성적표 불러오기</p>
         <div className="flex flex-row">
           {stepItem.map((step) => (
@@ -46,7 +47,7 @@ const EnterCoursePage = () => {
 
         <label
           htmlFor="upload"
-          className="cursor-pointer bg-[#005BAC] text-white p-4 rounded-[5px]"
+          className="cursor-pointer rounded-[5px] bg-[#005BAC] p-4 text-white"
         >
           파일 업로드하기
         </label>
@@ -55,24 +56,24 @@ const EnterCoursePage = () => {
 
       <NavBar type={type} setType={setType} />
 
-      <div className="flex flex-row justify-center space-x-4 mt-20">
+      <div className="mt-20 flex flex-row justify-center space-x-4">
         <input
-          className="border border-black w-80 p-4 text-sm rounded-[5px]"
+          className="w-80 rounded-[5px] border border-black p-4 text-sm"
           type="text"
           placeholder="학수번호를 검색하세요. (ex. GEB2024-001)"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button className="bg-[#005BAC] text-white py-4 px-6 rounded-[5px]">
+        <button className="rounded-[5px] bg-[#005BAC] px-6 py-4 text-white">
           과목 검색
         </button>
       </div>
 
       <div className="flex flex-col items-center">
-        <p className="font-semibold text-xl mb-5">내 수강 이력</p>
+        <p className="mb-5 text-xl font-semibold">내 수강 이력</p>
         <MyCourseComponent courseData={dummyData} />
 
-        <div className="flex space-x-3 mt-5">
+        <div className="mt-5 flex space-x-3">
           <img
             src={LeftArrow}
             className="cursor-pointer"

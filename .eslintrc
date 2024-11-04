@@ -1,0 +1,90 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": [
+    ".eslintrc.js",
+    "babel.config.js",
+    "jest.config.js",
+    "metro.config.js",
+    "tailwind.config.js"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-refresh", "perfectionist"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-empty-interface": 0,
+    "no-console": 0,
+    "camelcase": 0,
+    "no-use-before-define": 1,
+
+    "perfectionist/sort-named-imports": [
+      1,
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-named-exports": [
+      1,
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-exports": [
+      1,
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-imports": [
+      1,
+      {
+        "order": "asc",
+        "type": "line-length",
+        "newlines-between": "always",
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          ["parent", "sibling", "index"],
+          "object",
+          "unknown",
+          "custom-pages",
+          "custom-components",
+          "custom-zustand",
+          "custom-axios",
+          "custom-server",
+          "custom-layout",
+          "custom-assets"
+        ],
+        "custom-groups": {
+          "value": {
+            "custom-pages": "@pages/**",
+            "custom-components": "@components/**",
+            "custom-zustand": "@zustand/**",
+            "custom-axios": "@axios/**",
+            "custom-server": "@server/**",
+            "custom-layout": "@layout/**",
+            "custom-assets": "@assets/**"
+          }
+        },
+        "internal-pattern": ["src/**"]
+      }
+    ]
+  }
+}

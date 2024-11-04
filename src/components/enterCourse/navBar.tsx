@@ -7,13 +7,13 @@ interface NavBarProps {
 
 const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
   return (
-    <div className="border-b border-b-[#757575] flex flex-row justify-center space-x-5">
+    <div className="flex flex-row justify-center space-x-5 border-b border-b-[#757575]">
       <button
         onClick={() => setType("search")}
         className={`py-5 ${
           type === "search"
-            ? "text-[#005BAC] border-b-4 border-b-[#005BAC]"
-            : "text-[#757575] boredr-b-0"
+            ? "border-b-4 border-b-[#005BAC] text-[#005BAC]"
+            : "border-b-0 text-[#757575]"
         }`}
       >
         과목 검색하기
@@ -23,8 +23,8 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
         onClick={() => setType("direct")}
         className={`py-5 ${
           type === "direct"
-            ? "text-[#005BAC] border-b-4 border-b-[#005BAC]"
-            : "text-[#757575] boredr-b-0"
+            ? "border-b-4 border-b-[#005BAC] text-[#005BAC]"
+            : "border-b-0 text-[#757575]"
         }`}
       >
         직접 입력하기
