@@ -1,25 +1,24 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { dummyData } from "./dummyData";
+import { dummyData } from './dummyData';
 
-import NavBar from "@components/enterCourse/navBar";
-import MyCourseComponent from "@components/enterCourse/myCourse";
+import NavBar from '@components/enterCourse/navBar';
+import MyCourseComponent from '@components/enterCourse/myCourse';
 
-import LeftArrow from "@assets/enterCourse/leftArrow.svg";
-import RightArrow from "@assets/enterCourse/rightArrow.svg";
-
+import LeftArrow from '@assets/enterCourse/leftArrow.svg';
+import RightArrow from '@assets/enterCourse/rightArrow.svg';
 
 const EnterCoursePage = () => {
   const stepItem = [
-    { index: 1, title: "인하대학교\n포털시스템" },
-    { index: 2, title: "학사행정" },
-    { index: 3, title: "성적" },
-    { index: 4, title: "취득학점\n현황조회" },
-    { index: 5, title: "전체성적표\nExcel / PDF 저장" },
+    { index: 1, title: '인하대학교\n포털시스템' },
+    { index: 2, title: '학사행정' },
+    { index: 3, title: '성적' },
+    { index: 4, title: '취득학점\n현황조회' },
+    { index: 5, title: '전체성적표\nExcel / PDF 저장' },
   ];
 
-  const [type, setType] = useState<string>("search");
-  const [searchInput, setSearchInput] = useState<string>("");
+  const [type, setType] = useState<string>('search');
+  const [searchInput, setSearchInput] = useState<string>('');
 
   const [filterValue, setFilterValue] = useState<number>(15);
   const [page, setPage] = useState<number>(1);
@@ -64,9 +63,7 @@ const EnterCoursePage = () => {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button className="rounded-[5px] bg-[#005BAC] px-6 py-4 text-white">
-          과목 검색
-        </button>
+        <button className="rounded-[5px] bg-[#005BAC] px-6 py-4 text-white">과목 검색</button>
       </div>
 
       <div className="flex flex-col items-center">
@@ -83,9 +80,7 @@ const EnterCoursePage = () => {
             <button
               key={index + 1}
               onClick={() => handlePageClick(index + 1)}
-              className={`text-[#757575] ${
-                page === index + 1 ? "font-semibold" : "font-normal"
-              }`}
+              className={`text-[#757575] ${page === index + 1 ? 'font-semibold' : 'font-normal'}`}
             >
               {index + 1}
             </button>

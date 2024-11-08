@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import Logo from "@assets/logo.svg";
+import Logo from '@assets/logo.svg';
 
 const Header = () => {
   return (
@@ -16,7 +16,7 @@ const Header = () => {
         <Link to="/entercourse" className="px-6 py-7 text-xl">
           수강 이력 입력
         </Link>
-        <Link to="/" className="px-6 py-7 text-xl">
+        <Link to="/mypage" className="px-6 py-7 text-xl">
           마이페이지
         </Link>
       </div>

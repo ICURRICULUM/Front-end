@@ -1,10 +1,11 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import SignUpPage from "@pages/signUp/signUp";
-import StartPage from "@pages/startPage/startPage";
-import EnterCoursePage from "@pages/enterCourse/enterCourse";
+import MyPage from '@pages/myPage/myPage';
+import SignUpPage from '@pages/signUp/signUp';
+import StartPage from '@pages/startPage/startPage';
+import EnterCoursePage from '@pages/enterCourse/enterCourse';
 
-import Layout from "@layout/layout";
+import Layout from '@layout/layout';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<StartPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/entercourse" element={<EnterCoursePage />} />
+          <Route path="/mypage" element={<MyPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
