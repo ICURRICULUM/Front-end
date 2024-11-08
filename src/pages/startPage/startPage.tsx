@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import Logo from "@assets/logo.svg";
-import Background from "@assets/startPage/background.svg";
+import Logo from '@assets/logo.svg';
+import Background from '@assets/startPage/background.svg';
 
 const StartPage = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [isError, setIsError] = useState(false);
 
@@ -30,7 +30,7 @@ const StartPage = () => {
           type="text"
           placeholder="학교 이메일 주소(@inha.edu)"
           className={`mb-4 rounded-[5px] border p-4 ${
-            isError ? "border-[#D32F2F]" : "border-[#757575]"
+            isError ? 'border-[#D32F2F]' : 'border-[#757575]'
           }`}
         />
         <input
@@ -39,27 +39,18 @@ const StartPage = () => {
           type="password"
           placeholder="비밀번호"
           className={`mb-2 rounded-[5px] border p-4 ${
-            isError ? "border-[#D32F2F]" : "border-[#757575]"
+            isError ? 'border-[#D32F2F]' : 'border-[#757575]'
           }`}
         />
-        <p
-          className={`text-sm font-normal ${
-            isError ? "text-[#D32F2F]" : "text-[#757575]"
-          }`}
-        >
+        <p className={`text-sm font-normal ${isError ? 'text-[#D32F2F]' : 'text-[#757575]'}`}>
           {isError
-            ? "이메일 또는 비밀번호가 올바르지 않습니다."
-            : "인하대학교 구글 계정을 입력해주세요."}
+            ? '이메일 또는 비밀번호가 올바르지 않습니다.'
+            : '인하대학교 구글 계정을 입력해주세요.'}
         </p>
-        <button className="my-4 rounded-[5px] bg-[#005BAC] p-4 text-white">
-          로그인
-        </button>
+        <button className="my-4 rounded-[5px] bg-[#005BAC] p-4 text-white">로그인</button>
 
         <div className="flex flex-row justify-evenly">
-          <button
-            onClick={() => navigate("/signup")}
-            className="text-[#757575] underline"
-          >
+          <button onClick={() => navigate('/signup')} className="text-[#757575] underline">
             회원가입
           </button>
           <button className="text-[#757575] underline">이메일 찾기</button>
