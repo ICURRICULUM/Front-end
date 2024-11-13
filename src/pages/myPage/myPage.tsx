@@ -54,60 +54,59 @@ const MyPage = () => {
   };
 
   return (
-    <main className="mx-auto w-4/5">
-      <header className="mt-40 text-center">
-        <h1>마이페이지</h1>
+    <main className="mx-auto max-w-5xl py-20">
+      <header className="mt-20 text-center">
+        <p className="text-3xl font-bold">마이페이지</p>
       </header>
 
-      <section className="flex w-full flex-col">
-        <article className="flex flex-col space-y-20">
-          <section className="flex flex-row space-x-10">
-            <MyInfo myInfoData={myInfoData} />
-            <aside className="flex flex-col items-center space-y-2.5">
-              <CheckList checkListData={checkListData} />
-              <button
-                onClick={checkRequirement}
-                className="rounded-[5px] border border-[#005BAC] text-xl font-semibold text-[#005bac]"
-              >
-                내 졸업요건 확인하기
-              </button>
-            </aside>
-          </section>
-
-          <section className="flex flex-col space-y-5">
-            <header className="flex flex-row items-center space-x-4">
-              <img src={FolderIcon} alt="Folder Icon" />
-              <h2 className="text-xl font-semibold">내 수강 이력</h2>
-            </header>
-            <MyCourseComponent courseData={dummyData} />
-
-            <nav aria-label="Pagination" className="mt-5 flex justify-center space-x-3">
-              <img
-                src={LeftArrow}
-                className="cursor-pointer"
-                onClick={() => page > 1 && handlePageClick(page - 1)}
-                alt="Previous Page"
-              />
-              {Array.from({ length: totalPage }, (_, index) => (
-                <button
-                  key={index + 1}
-                  onClick={() => handlePageClick(index + 1)}
-                  className={`text-[#757575] ${
-                    page === index + 1 ? 'font-semibold' : 'font-normal'
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
-              <img
-                src={RightArrow}
-                className="cursor-pointer"
-                onClick={() => page < totalPage && handlePageClick(page + 1)}
-                alt="Next Page"
-              />
-            </nav>
-          </section>
+      <section className="mt-10 flex flex-col items-center">
+        <article className="flex w-full flex-row justify-between">
+          <MyInfo myInfoData={myInfoData} />
+          <aside className="flex min-w-[440px] flex-col items-center space-y-4">
+            <CheckList checkListData={checkListData} />
+            <button
+              onClick={checkRequirement}
+              className="w-full rounded-md border border-[#005BAC] px-4 py-2 text-lg font-semibold text-[#005bac] hover:bg-[#005BAC] hover:text-white"
+            >
+              내 졸업요건 확인하기
+            </button>
+          </aside>
         </article>
+
+        <section className="mt-16 w-full">
+          <header className="mb-5 flex items-center space-x-4">
+            <img src={FolderIcon} alt="Folder Icon" className="h-6 w-6" />
+            <h2 className="text-xl font-semibold">내 수강 이력</h2>
+          </header>
+
+          <MyCourseComponent courseData={dummyData} />
+
+          <nav aria-label="Pagination" className="mt-8 flex justify-center space-x-3">
+            <img
+              src={LeftArrow}
+              className={`cursor-pointer ${page <= 1 ? 'cursor-default opacity-50' : ''}`}
+              onClick={() => page > 1 && handlePageClick(page - 1)}
+              alt="Previous Page"
+            />
+            {Array.from({ length: totalPage }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => handlePageClick(index + 1)}
+                className={`text-lg ${
+                  page === index + 1 ? 'font-bold text-black' : 'text-[#757575]'
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <img
+              src={RightArrow}
+              className={`cursor-pointer ${page >= totalPage ? 'cursor-default opacity-50' : ''}`}
+              onClick={() => page < totalPage && handlePageClick(page + 1)}
+              alt="Next Page"
+            />
+          </nav>
+        </section>
       </section>
     </main>
   );

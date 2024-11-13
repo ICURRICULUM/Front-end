@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface MyCourseComponentProps {
   courseData: {
@@ -11,11 +11,9 @@ interface MyCourseComponentProps {
   }[];
 }
 
-const MyCourseComponent: React.FC<MyCourseComponentProps> = ({
-  courseData,
-}) => {
+const MyCourseComponent: React.FC<MyCourseComponentProps> = ({ courseData }) => {
   return (
-    <table className="rounded-[5px] border border-black">
+    <table className="w-full rounded-five border border-black">
       <thead>
         <tr className="bg-[#F5F5F5] font-semibold text-[#757575]">
           <th className="px-4 py-2">학수번호</th>
@@ -32,9 +30,7 @@ const MyCourseComponent: React.FC<MyCourseComponentProps> = ({
             <td className="px-4 py-2">{course.courseId}</td>
             <td className="px-4 py-2">{course.courseName}</td>
             <td className="px-4 py-2">{course.area}</td>
-            <td className="px-4 py-2">
-              {course.status === null ? "-" : course.status}
-            </td>
+            <td className="px-4 py-2">{course.status === null ? '-' : course.status}</td>
             <td className="px-4 py-2">{course.credit}</td>
             <td className="px-4 py-2">{course.grade}</td>
           </tr>

@@ -19,7 +19,7 @@ const StartPage = () => {
         backgroundImage: `url(${Background})`,
       }}
     >
-      <div className="mt-20 flex h-4/5 w-1/3 min-w-[480px] flex-col rounded-l-[5px] bg-white p-20">
+      <div className="mt-20 flex h-4/5 w-1/3 min-w-[480px] flex-col rounded-l-five bg-white p-20">
         <img className="mb-8 w-fit" src={Logo} alt="Inha Logo" />
         <div className="mb-4 text-xl font-semibold text-[#424242]">
           학교 이메일로 로그인해주세요
@@ -53,7 +53,9 @@ const StartPage = () => {
           <button onClick={() => navigate('/signup')} className="text-[#757575] underline">
             회원가입
           </button>
-          <button className="text-[#757575] underline">이메일 찾기</button>
+          <button onClick={() => navigate('/infoinput')} className="text-[#757575] underline">
+            이메일 찾기
+          </button>
         </div>
       </div>
     </div>

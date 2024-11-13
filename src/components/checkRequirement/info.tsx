@@ -28,7 +28,7 @@ const Info: React.FC<InfoProps> = ({ infoData }) => {
       </div>
 
       <div className="flex flex-row">
-        <div className="flex flex-col items-center space-y-2 rounded-[5px] border border-black bg-white px-10 py-8">
+        <div className="flex flex-col items-center space-y-2 rounded-five border border-black bg-white px-10 py-8">
           <p>졸업이수학점</p>
           <p className="flex flex-row text-[#757575]">
             <p
@@ -44,7 +44,7 @@ const Info: React.FC<InfoProps> = ({ infoData }) => {
           </p>
         </div>
 
-        <div className="flex flex-col items-center space-y-2 rounded-[5px] border border-black bg-white px-10 py-8">
+        <div className="flex flex-col items-center space-y-2 rounded-five border border-black bg-white px-10 py-8">
           <p>전공이수학점</p>
           <p className="flex flex-row text-[#757575]">
             <p
@@ -60,7 +60,7 @@ const Info: React.FC<InfoProps> = ({ infoData }) => {
           </p>
         </div>
 
-        <div className="flex flex-col items-center space-y-2 rounded-[5px] border border-black bg-white px-10 py-8">
+        <div className="flex flex-col items-center space-y-2 rounded-five border border-black bg-white px-10 py-8">
           <p>다중전공이수학점</p>
           <p className="flex flex-row text-[#757575]">
             <p
