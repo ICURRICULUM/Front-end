@@ -10,7 +10,7 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
     <div className="flex flex-row justify-center space-x-5 border-b border-b-[#757575]">
       <button
         onClick={() => setType('major')}
-        className={`py-5 ${
+        className={`px-8 py-5 font-semibold ${
           type === 'major'
             ? 'border-b-4 border-b-[#005BAC] text-[#005BAC]'
             : 'border-b-0 text-[#757575]'
@@ -19,7 +19,7 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
         주전공
       </button>
 
-      <button
+      {/* <button
         onClick={() => setType('doubleMajor')}
         className={`py-5 ${
           type === 'doubleMajor'
@@ -28,7 +28,7 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
         }`}
       >
         다중전공
-      </button>
+      </button> */}
     </div>
   );
 };

@@ -5,23 +5,24 @@ import DownArrow from '@assets/signUp/downArrow.svg';
 
 interface Item {
   id: number;
+  value: number;
   name: string;
-  value: string;
 }
 
 interface MajorSelectProps {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: (value: number) => void;
   itemList: Item[];
 }
 
-const MajorSelect: React.FC<MajorSelectProps> = ({ value, setValue, itemList }) => {
+const MajorSelect: React.FC<MajorSelectProps> = ({ setValue, itemList }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [displayMajor, setDisplayMajor] = useState<string>('');
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleValue = (item: Item) => {
     setValue(item.value);
+    setDisplayMajor(item.name);
     setIsOpen(false);
   };
 
@@ -35,7 +36,9 @@ const MajorSelect: React.FC<MajorSelectProps> = ({ value, setValue, itemList }) 
           }`}
           onClick={toggleDropdown}
         >
-          {value !== '' ? value : '주전공 학과를 선택하세요.'}
+          <p className="text-[#757575]">
+            {displayMajor !== '' ? displayMajor : '주전공 학과를 선택하세요.'}
+          </p>
           <span>{isOpen ? <img src={UpArrow} /> : <img src={DownArrow} />}</span>
         </div>
         {isOpen && (

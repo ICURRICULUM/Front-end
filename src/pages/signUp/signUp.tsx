@@ -1,109 +1,92 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import EmailIcon from '@assets/signUp/email.svg';
-import MailIcon from '@assets/signUp/mailIcon.svg';
-import EditIcon from '@assets/signUp/editIcon.svg';
-import LaughIcon from '@assets/signUp/laughIcon.svg';
-import RightArrow from '@assets/signUp/rightArrow.svg';
-import AgreementIcon from '@assets/signUp/agreement.svg';
+import Email from '@components/signUp/signUp/email';
+import StepItem from '@components/common/stepComponent';
+import Password from '@components/signUp/signUp/password';
+import Agreement from '@components/signUp/signUp/agreement';
+
+import { useSignUpStore } from '@zustand/user/store';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
 
-  const stepItem = [
-    { index: 1, title: '약관 및 메일 인증', icon: MailIcon },
-    { index: 2, title: '필수정보 입력', icon: EditIcon },
-    { index: 3, title: '회원가입 완료', icon: LaughIcon },
-  ];
+  const { setSignUpState } = useSignUpStore();
+
+  const [canNext, setCanNext] = useState<boolean>(false);
+
+  const [email, setEmail] = useState<string>('');
+  const [verifyCode, setVerifyCode] = useState<string>('');
+  const [isVerified, setIsVerified] = useState<boolean>(false);
+
+  const [password, setPassword] = useState<string>('');
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
+
+  const [isAgree, setIsAgree] = useState<boolean>(false);
+
+  const handleEmail = (email: string) => {
+    setEmail(email);
+  };
+
+  const handleVerifyCode = (code: string) => {
+    setVerifyCode(code);
+  };
+
+  const handlePassword = (password: string) => {
+    setPassword(password);
+  };
+
+  const handlePasswordValid = (valid: boolean) => {
+    setIsPasswordValid(valid);
+  };
+
+  const handleAgree = () => {
+    setIsAgree(!isAgree);
+  };
+
+  const toNext = () => {
+    setSignUpState({ password: password });
+    navigate('/join/begin');
+  };
+
+  useEffect(() => {
+    setCanNext(isVerified && isPasswordValid && isAgree);
+  }, [isVerified, isPasswordValid, isAgree]);
 
   return (
-    <div className="mb-10 pt-20">
-      <div className="mb-14 flex flex-col items-center space-y-5 bg-[#F5F5F5] py-20">
-        <p className="text-2xl font-semibold">회원가입</p>
-        <div className="flex flex-row">
-          {stepItem.map((step) => (
-            <div key={step.index} className="flex flex-row items-center">
-              <div className="flex flex-col items-center space-y-2">
-                <div
-                  className={`rounded-full border p-5 ${
-                    step.index === 1 ? 'border-[#005BAC] shadow-icon' : 'border-[#757575]'
-                  } `}
-                >
-                  <img src={step.icon} />
-                </div>
-                <p
-                  className={`text-xs ${
-                    step.index === 1 ? 'font-semibold text-[#005BAC]' : 'font-normal text-[#757575]'
-                  }`}
-                >
-                  {step.title}
-                </p>
-              </div>
+    <main className="mb-10">
+      <StepItem currentIndex={1} />
 
-              {step.index < stepItem.length && (
-                <img src={RightArrow} alt="Arrow Icon" className="px-3.5" />
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+      <section className="mx-auto my-0 flex w-[600px] flex-col space-y-20">
+        <Email
+          email={email}
+          setEmail={handleEmail}
+          code={verifyCode}
+          setCode={handleVerifyCode}
+          isVerified={isVerified}
+          setIsVerified={(state: boolean) => setIsVerified(state)}
+        />
 
-      <div className="flex min-w-[600px] flex-col items-center">
-        <div className="mb-20 flex flex-col space-y-9">
-          <div className="flex flex-row space-x-4">
-            <img src={AgreementIcon} />
-            <p className="text-xl font-semibold">약관 동의</p>
-          </div>
-          <div className="flex flex-col space-y-4">
-            <textarea
-              className="min-h-[400px] min-w-[600px] resize-none rounded-[5px] border border-[#757575]"
-              readOnly
-            />
-            <div className="flex flex-row space-x-2">
-              <input type="checkbox" id="agree" />
-              <label htmlFor="agree">개인정보 수집 및 정보이용에 동의합니다.</label>
-            </div>
-          </div>
-        </div>
+        <Password
+          email={email}
+          password={password}
+          setPassword={handlePassword}
+          setValid={handlePasswordValid}
+        />
 
-        <div className="flex flex-col space-y-9">
-          <div className="flex flex-row space-x-4">
-            <img src={EmailIcon} />
-            <p className="text-xl font-semibold">메일 인증</p>
-          </div>
-          <div className="flex flex-col space-y-1">
-            <p className="flex flex-row text-sm font-semibold">
-              이메일 주소<p className="ml-0.5 text-[#d32f2f]">*</p>
-            </p>
-            <div className="flex flex-col space-y-4">
-              <div className="flex flex-row space-x-2">
-                <input
-                  className="min-w-[432px] rounded-[5px] border border-[#757575] p-4"
-                  type="text"
-                  placeholder="학교 메일(@inha.edu)을 입력하세요."
-                />
-                <button className="min-w-40 rounded-[5px] bg-[#005BAC] p-4 text-base font-semibold text-white">
-                  인증메일 받기
-                </button>
-              </div>
-              <div className="flex flex-row space-x-2">
-                <input
-                  className="rounded-[5px] border border-[#757575] p-4"
-                  type="text"
-                  placeholder="인증번호 6자리"
-                />
-                <button
-                  onClick={() => navigate(`/infoinput`)}
-                  className="min-w-40 rounded-[5px] border border-[#005BAC] bg-white p-4 text-base font-semibold text-[#005BAC]"
-                >
-                  인증번호 입력
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <Agreement value={isAgree} setValue={handleAgree} />
+
+        <button
+          onClick={toNext}
+          disabled={!canNext}
+          className={`w-full rounded-[5px] p-4 text-base font-semibold text-white ${
+            canNext ? 'bg-[#005BAC]' : 'bg-[#757575]'
+          }`}
+        >
+          다음
+        </button>
+      </section>
+    </main>
   );
 };
 

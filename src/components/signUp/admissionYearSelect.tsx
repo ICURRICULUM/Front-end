@@ -10,18 +10,19 @@ interface Item {
 }
 
 interface AdmissionYearSelectProps {
-  value: number;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  setValue: (value: number) => void;
   itemList: Item[];
 }
 
-const AdmissionYearSelect: React.FC<AdmissionYearSelectProps> = ({ value, setValue, itemList }) => {
+const AdmissionYearSelect: React.FC<AdmissionYearSelectProps> = ({ setValue, itemList }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [displayValue, setDisplayValue] = useState<string>('');
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleValue = (item: Item) => {
     setValue(item.value);
+    setDisplayValue(item.name);
     setIsOpen(false);
   };
 
@@ -35,11 +36,14 @@ const AdmissionYearSelect: React.FC<AdmissionYearSelectProps> = ({ value, setVal
           }`}
           onClick={toggleDropdown}
         >
-          {value !== 0 ? value + '학번' : '학번을 선택하세요.'}
+          <p className="text-[#757575]">
+            {displayValue !== '' ? displayValue : '학번을 선택하세요.'}
+          </p>
           <span>{isOpen ? <img src={UpArrow} /> : <img src={DownArrow} />}</span>
         </div>
+
         {isOpen && (
-          <div className="absolute w-full rounded-five border border-[#757575] bg-white">
+          <div className="absolute z-30 w-full rounded-five border border-[#757575] bg-white">
             {itemList.map((item, index) => (
               <div
                 key={index}
