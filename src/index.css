@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Pretendard-Bold';
+  src: url('assets/fonts/Pretendard-Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard-Light';
+  src: url('assets/fonts/Pretendard-Light.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('assets/fonts/Pretendard-Medium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('assets/fonts/Pretendard-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard-SemiBold';
+  src: url('assets/fonts/Pretendard-SemiBold.otf') format('truetype');
+}
+
+body {
+  font-family: 'Pretendard-Regular', 'Pretendard-Medium', 'Pretendard-Bold', 'Pretendard-Light',
+    'Pretendard-SemiBold', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
