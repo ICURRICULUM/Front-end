@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useLogin } from '@hooks/member/hook';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLogin, useGetMemberInfo } from '@hooks/member/hook';
 
-import { useLoggedInStore } from '@zustand/user/store';
+import { useLoggedInStore, useUserProfileStore } from '@zustand/user/store';
 
 import Logo from '@assets/logo.svg';
 import Background from '@assets/startPage/background.svg';
@@ -11,6 +11,9 @@ const StartPage = () => {
   const navigate = useNavigate();
 
   const { isLoggedIn, setIsLoggedIn } = useLoggedInStore();
+  const { setUserProfile } = useUserProfileStore();
+
+  const { data: profile } = useGetMemberInfo();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,8 +32,16 @@ const StartPage = () => {
 
   const { mutateAsync: login } = useLogin(handleError, resetStates);
 
-  const handleLogin = () => {
-    login({ email, password });
+  const handleLogin = async () => {
+    await login({ email, password });
+    setUserProfile(profile.result);
+  };
+
+  const handleEnter = async (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      await login({ email, password });
+      setUserProfile(profile.result);
+    }
   };
 
   const handleLogout = () => {
@@ -48,6 +59,8 @@ const StartPage = () => {
       {isLoggedIn ? (
         <div className="mt-20 flex h-4/5 w-[480px] flex-col overflow-y-scroll rounded-l-five bg-white p-8 sm:p-12 md:p-16 lg:p-20">
           <img className="mb-8 w-fit" src={Logo} alt="Inha Logo" />
+
+          <p className="mb-8 text-xl">{profile?.result.name}님, 안녕하세요!</p>
 
           <button onClick={handleLogout} className="my-4 rounded-[5px] bg-[#005BAC] p-4 text-white">
             로그아웃
@@ -71,6 +84,7 @@ const StartPage = () => {
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleEnter}
             type="password"
             placeholder="비밀번호"
             className={`mb-2 rounded-[5px] border p-4 ${

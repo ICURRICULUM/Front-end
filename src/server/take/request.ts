@@ -1,4 +1,5 @@
 interface Take {
+  takeId: number;
   code: string;
   name: string;
   category: string;
@@ -8,7 +9,7 @@ interface Take {
 }
 
 export interface UpdateTakeListsRequest {
-  takeList: Take[];
+  takeList: Take;
 }
 
 export interface DeleteTakeRequest {
@@ -16,5 +17,5 @@ export interface DeleteTakeRequest {
 }
 
 export interface CreateTakeListsRequest {
-  takeList: Take[];
+  takeCreateDTOList: Omit<Take, 'takeId'>[];
 }

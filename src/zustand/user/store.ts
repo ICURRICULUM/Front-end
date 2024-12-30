@@ -30,7 +30,7 @@ export const useUserProfileStore = create<{
     email: 'jjinh0213@inha.edu',
     name: '',
     joinYear: 0,
-    departmentName: '',
+    majorList: [],
   },
   setUserProfile: (newProfile) =>
     set((state) => ({ userProfile: { ...state.userProfile, ...newProfile } })),

@@ -1,11 +1,24 @@
 import { useNavigate } from 'react-router-dom';
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import {
+  useMutation,
+  useSuspenseQuery,
+  UseMutationResult,
+  UseSuspenseQueryResult,
+} from '@tanstack/react-query';
 
 import { useLoggedInStore } from '@zustand/user/store';
 
-import { login, signUp } from '@server/member/api';
+import { login, signUp, getMemberInfo } from '@server/member/api';
 import { LoginRequest, SignUpRequest } from '@server/member/request';
-import { LoginResponse, SignUpResponse } from '@server/member/response';
+import { LoginResponse, SignUpResponse, GetMemberInfoResponse } from '@server/member/response';
+
+// 회원 정보 조회
+export const useGetMemberInfo = (): UseSuspenseQueryResult<GetMemberInfoResponse> => {
+  return useSuspenseQuery({
+    queryKey: [`/members/info`],
+    queryFn: () => getMemberInfo(),
+  });
+};
 
 // 회원가입
 export const useSignUp = (): UseMutationResult<SignUpResponse, unknown, SignUpRequest> => {

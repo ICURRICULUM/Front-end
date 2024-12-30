@@ -7,7 +7,9 @@ export interface GetTakeListsResponse {
       category: string;
       credit: number;
       majorType: string;
+      grade: number;
     }[];
+    totalPage: number;
   };
 }
 
@@ -21,6 +23,7 @@ export interface UpdateTakeListsResponse {
       credit: number;
       majorType: string;
     }[];
+    totalPage: number;
   };
 }
 
@@ -34,6 +37,7 @@ export interface DeleteTakeResponse {
       credit: number;
       majorType: string;
     }[];
+    totalPage: number;
   };
 }
 
@@ -47,5 +51,6 @@ export interface CreateTakeListsResponse {
       credit: number;
       majorType: string;
     }[];
+    totalPage: number;
   };
 }

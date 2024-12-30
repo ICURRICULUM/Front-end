@@ -8,8 +8,13 @@ import {
 
 import { GetAxiosInstance, PostAxiosInstance } from '@axios/axios.method';
 
-export const getTakeLists = async (): Promise<GetTakeListsResponse> => {
-  const response = await GetAxiosInstance<GetTakeListsResponse>(`/take/`);
+export const getTakeLists = async (page: number, size: number): Promise<GetTakeListsResponse> => {
+  const response = await GetAxiosInstance<GetTakeListsResponse>(`/take/`, {
+    params: {
+      page: page,
+      size: size,
+    },
+  });
 
   return response.data;
 };

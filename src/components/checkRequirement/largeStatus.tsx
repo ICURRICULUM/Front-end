@@ -31,11 +31,7 @@ const LargeStatus: React.FC<LargeStatusProps> = ({ title, value }) => {
         <li className="flex flex-row">
           <p className="w-20">전체</p>
           <p className="min-w-[98px] text-right font-normal">
-            <span
-              className={`${
-                value.totalCompletedCredit < value.totalNeedCredit && 'text-[#D32F2F]'
-              }`}
-            >
+            <span className={`${!value.isOverTotalNeedCredit && 'text-[#D32F2F]'}`}>
               {value.totalCompletedCredit}
             </span>
             <span> / {value.totalNeedCredit} 학점</span>
@@ -45,106 +41,60 @@ const LargeStatus: React.FC<LargeStatusProps> = ({ title, value }) => {
         <li className="flex flex-row">
           <p className="w-20">전공전체</p>
           <p className="min-w-[98px] text-right font-normal">
-            <span
-            // className={`${
-            //   value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit <
-            //     value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit &&
-            //   'text-[#D32F2F]'
-            // }`}
-            >
-              {/* {value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit} */}
+            <span className={`${!value.majorSelectDTO.isClear && 'text-[#D32F2F]'}`}>
+              {value.majorSelectDTO.totalMajorCompletedCredit}
             </span>
-            <span>
-              {/* / {value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit} 학점 */}
-            </span>
+            <span> / {value.majorSelectDTO.totalMajorRequiredCredit} 학점</span>
           </p>
         </li>
 
         <li className="flex flex-row">
           <p className="w-20">전공필수</p>
           <p className="min-w-[98px] text-right font-normal">
-            <span
-            // className={`${
-            //   value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit <
-            //     value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit &&
-            //   'text-[#D32F2F]'
-            // }`}
-            >
-              {/* {value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit} */}
+            <span className={`${!value.majorRequiredDTO.isClear && 'text-[#D32F2F]'}`}>
+              {value.majorRequiredDTO.completedCredit}
             </span>
-            <span>
-              {/* / {value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit} 학점 */}
-            </span>
+            <span> / {value.majorRequiredDTO.requiredCredit} 학점</span>
           </p>
         </li>
 
         <li className="flex flex-row">
           <p className="w-20">교양필수</p>
           <p className="min-w-[98px] text-right font-normal">
-            <span
-            // className={`${
-            //   value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit <
-            //     value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit &&
-            //   'text-[#D32F2F]'
-            // }`}
-            >
-              {/* {value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit} */}
+            <span className={`${!value.generalRequiredDTO.isClear && 'text-[#D32F2F]'}`}>
+              {value.generalRequiredDTO.completedCredit}
             </span>
-            <span>
-              {/* / {value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit} 학점 */}
-            </span>
+            <span> / {value.generalRequiredDTO.requiredCredit} 학점</span>
           </p>
         </li>
 
         <li className="flex flex-row">
           <p className="w-20">핵심교양</p>
           <p className="min-w-[98px] text-right font-normal">
-            <span
-            // className={`${
-            //   value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit <
-            //     value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit &&
-            //   'text-[#D32F2F]'
-            // }`}
-            >
-              {/* {value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit} */}
+            <span className={`${!value.coreDTO.isClear && 'text-[#D32F2F]'}`}>
+              {value.coreDTO.completedCredit}
             </span>
-            <span>
-              {/* / {value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit} 학점 */}
-            </span>
+            <span> / {value.coreDTO.requiredCredit} 학점</span>
           </p>
         </li>
 
         <li className="flex flex-row">
           <p className="w-20">SW/AI</p>
           <p className="min-w-[98px] text-right font-normal">
-            <span
-            // className={`${
-            //   value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit <
-            //     value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit &&
-            //   'text-[#D32F2F]'
-            // }`}
-            >
-              {/* {value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit} */}
+            <span className={`${!value.swAiDTO.isClear && 'text-[#D32F2F]'}`}>
+              {value.swAiDTO.completedCredit}
             </span>
-            <span>
-              {/* / {value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit} 학점 */}
-            </span>
+            <span> / {value.swAiDTO.requiredCredit} 학점</span>
           </p>
         </li>
 
         <li className="flex flex-row">
           <p className="w-20">창의</p>
           <p className="min-w-[98px] text-right font-normal">
-            <span
-            // className={`${
-            //   value.majorRequiredDTO.completedCredit + value.majorSelectDTO.completedCredit <
-            //     value.majorRequiredDTO.requiredCredit + value.majorSelectDTO.requiredCredit &&
-            //   'text-[#D32F2F]'
-            // }`}
-            >
+            <span className={`${!value.creativityDTO.isClear && 'text-[#D32F2F]'}`}>
               {value.creativityDTO.completedCredit}
             </span>
-            <span>/ {value.creativityDTO.requiredCredit} 학점</span>
+            <span> / {value.creativityDTO.requiredCredit} 학점</span>
           </p>
         </li>
       </ol>

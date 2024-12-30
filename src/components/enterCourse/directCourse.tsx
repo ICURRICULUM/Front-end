@@ -1,26 +1,48 @@
-import { CourseItem } from 'type/types';
+import { CustomCourseItem } from 'type/types';
 import React, { useState, useEffect } from 'react';
 
 interface DirectCourseProps {
-  value: CourseItem;
-  setArea: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  setStatus: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  setList: (item: CourseItem) => void;
+  value: CustomCourseItem;
+  setValue: React.Dispatch<React.SetStateAction<CustomCourseItem>>;
+
+  createCourse: () => void;
 }
 
-const DirectCourse: React.FC<DirectCourseProps> = ({ value, setArea, setStatus, setList }) => {
-  const areaOptions: string[] = ['교양필수', '전공필수'];
+const DirectCourse: React.FC<DirectCourseProps> = ({ value, setValue, createCourse }) => {
+  const areaOptions: string[] = [
+    '전공필수',
+    '전공선택',
+    '교양필수',
+    '교양선택',
+    'SW_AI',
+    '창의',
+    '핵심교양',
+  ];
   const statusOptions: string[] = ['주전공'];
-  const creditOptions: number[] = [1.0, 2.0, 3.0, 4.0];
 
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((prev) => ({ ...prev, name: e.target.value }));
+  };
+
+  const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue((prev) => ({ ...prev, category: e.target.value }));
+  };
+
+  const handleMajorType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue((prev) => ({ ...prev, majorType: e.target.value }));
+  };
+
+  const handleCredit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((prev) => ({ ...prev, credit: Number(e.target.value) }));
+  };
+
   useEffect(() => {
     if (
-      value.courseId !== '' &&
-      value.courseName !== '' &&
-      value.area !== '' &&
-      value.status !== '' &&
+      value.name !== '' &&
+      value.category !== '' &&
+      value.majorType !== '' &&
       value.credit !== 0
     ) {
       setIsComplete(true);
@@ -46,58 +68,57 @@ const DirectCourse: React.FC<DirectCourseProps> = ({ value, setArea, setStatus, 
                 type="text"
                 placeholder="과목명을 입력하세요."
                 className="w-full text-center"
+                onChange={handleName}
               />
             </td>
 
-            <td className="w-[160px] border border-black px-4 py-2">
+            <td className="w-[160px] border border-black px-4 py-2 font-semibold text-[#005BAC]">
               <select
-                className="rounded px-2 py-1 text-[#005BAC]"
-                value={value.area}
-                onChange={setArea}
+                disabled={!value.name}
+                className="rounded px-2 py-1"
+                value={value.category}
+                onChange={handleCategory}
               >
-                <option value="" className="text-center text-[#005BAC]">
+                <option value="" className="text-center">
                   선택하기
                 </option>
                 {areaOptions.map((area) => (
-                  <option key={area} value={area} className="text-center text-[#005BAC]">
+                  <option key={area} value={area} className="text-center">
                     {area}
                   </option>
                 ))}
               </select>
             </td>
 
-            <td className="w-[180px] border border-black px-4 py-2">
-              <select
-                className="rounded px-2 py-1 text-[#005BAC]"
-                value={value.status}
-                onChange={setStatus}
-              >
-                <option value="" className="text-center text-[#005BAC]">
-                  선택하기
-                </option>
-                {statusOptions.map((status) => (
-                  <option key={status} value={status} className="text-center text-[#005BAC]">
-                    {status}
+            <td className="w-[180px] border border-black px-4 py-2 font-semibold text-[#005BAC]">
+              {value.category === '교양필수' ? (
+                <p>-</p>
+              ) : (
+                <select
+                  disabled={!value.category}
+                  className="rounded px-2 py-1"
+                  value={value.majorType}
+                  onChange={handleMajorType}
+                >
+                  <option value="" className="text-center">
+                    선택하기
                   </option>
-                ))}
-              </select>
+                  {statusOptions.map((status) => (
+                    <option key={status} value={status} className="text-center">
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              )}
             </td>
 
             <td className="w-[120px] border border-black px-4 py-2">
-              <select
-                className="rounded px-2 py-1 text-[#005BAC]"
-                value={value.status}
-                onChange={setStatus}
-              >
-                <option value="" className="text-center text-[#005BAC]">
-                  선택하기
-                </option>
-                {creditOptions.map((status) => (
-                  <option key={status} value={status} className="text-center text-[#005BAC]">
-                    {status}
-                  </option>
-                ))}
-              </select>
+              <input
+                type="text"
+                placeholder="학점 입력"
+                className="w-full text-center"
+                onChange={handleCredit}
+              />
             </td>
 
             <td className="w-[120px] border border-black px-4 py-2">성적</td>
@@ -106,13 +127,13 @@ const DirectCourse: React.FC<DirectCourseProps> = ({ value, setArea, setStatus, 
       </table>
 
       <button
-        onClick={() => setList(value)}
+        onClick={createCourse}
         disabled={!isComplete}
         className={`rounded-five border border-[#005bac] p-4 font-semibold  ${
           isComplete ? 'bg-[#005bac] text-white' : 'bg-white  text-[#005bac]'
         }`}
       >
-        이 과목 담기
+        선택한 과목 저장하기
       </button>
     </div>
   );

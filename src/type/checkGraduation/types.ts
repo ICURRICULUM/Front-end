@@ -1,3 +1,12 @@
+// UncompleteItem
+export interface UncompleteItem {
+  createAt: string;
+  id: number;
+  code: string;
+  name: string;
+  credit: number;
+}
+
 // SW/AI
 export interface SWAiItem {
   completedCredit: number;
@@ -24,13 +33,7 @@ export interface CoreItem {
 export interface GeneralRequiredItem {
   completedCredit: number;
   requiredCredit: number;
-  uncompletedCourseSet: {
-    createAt: string;
-    id: number;
-    code: string;
-    name: string;
-    credit: number;
-  }[];
+  uncompletedCourseSet: UncompleteItem[];
   isClear: boolean;
 }
 
@@ -38,19 +41,13 @@ export interface GeneralRequiredItem {
 export interface MajorRequiredItem {
   completedCredit: number;
   requiredCredit: number;
-  uncompletedCourseList: {
-    createAt: string;
-    id: number;
-    code: string;
-    name: string;
-    credit: number;
-  }[];
+  uncompletedCourseList: UncompleteItem[];
   isClear: boolean;
 }
 
 // 전공 선택
 export interface MajorSelectItem {
-  completedCredit: number;
-  requiredCredit: number;
+  totalMajorCompletedCredit: number;
+  totalMajorRequiredCredit: number;
   isClear: boolean;
 }

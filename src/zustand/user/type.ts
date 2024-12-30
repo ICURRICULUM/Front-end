@@ -4,8 +4,11 @@ export interface SignUpState {
 }
 
 export interface UserProfile {
-  email: string;
   name: string;
+  email: string;
   joinYear: number;
-  departmentName: string;
+  majorList: {
+    majorType: string;
+    departmentName: string;
+  }[];
 }

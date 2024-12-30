@@ -8,21 +8,38 @@ import {
 } from './checkGraduation/types';
 
 export interface CourseItem {
-  courseId: string;
-  courseName: string;
-  area: string;
-  status: string;
+  courseId: number;
+  name: string;
+  code: string;
+  category: string;
   credit: number;
-  grade: string;
 }
 
-export interface Course {
+export interface CustomCourseItem {
+  name: string;
+  category: string;
+  credit: number;
+  majorType: string;
+  grade: number;
+}
+
+export interface CreateCourseItem {
+  code: string;
+  name: string;
+  category: string;
+  credit: number;
+  majorType: string;
+  grade: number;
+}
+
+export interface TakeItem {
   takeId: number;
   code: string;
   name: string;
   category: string;
   credit: number;
   majorType: string;
+  grade: number;
 }
 
 export interface CheckGraduationItem {

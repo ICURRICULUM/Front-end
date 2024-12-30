@@ -1,31 +1,44 @@
-import { CourseItem } from 'type/types';
+import { CreateCourseItem } from '@type/types';
 import React, { useState, useEffect } from 'react';
 
 interface SearchCourseProps {
-  value: CourseItem;
-  setArea: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  setStatus: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  setList: (item: CourseItem) => void;
+  value: CreateCourseItem;
+  setCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  setMajorType: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  setList: (item: CreateCourseItem) => void;
 }
 
-const SearchCourse: React.FC<SearchCourseProps> = ({ value, setArea, setStatus, setList }) => {
-  const areaOptions: string[] = ['교양필수', '전공필수'];
+const SearchCourse: React.FC<SearchCourseProps> = ({
+  value,
+  setCategory,
+  setMajorType,
+  setList,
+}) => {
+  const areaOptions: string[] = [
+    '전공필수',
+    '전공선택',
+    '교양필수',
+    '교양선택',
+    'SW_AI',
+    '창의',
+    '핵심교양',
+  ];
   const statusOptions: string[] = ['주전공'];
 
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
-  const handleAreaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setArea(e);
-    setStatus({ target: { value: '' } } as React.ChangeEvent<HTMLSelectElement>);
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e);
+    setMajorType({ target: { value: '' } } as React.ChangeEvent<HTMLSelectElement>);
   };
 
   useEffect(() => {
     if (
-      value.courseId !== '' &&
-      value.courseName !== '' &&
+      value.code !== '' &&
+      value.name !== '' &&
       value.credit !== 0 &&
-      ((value.area === '교양필수' && value.status === '') ||
-        (value.area === '전공필수' && value.status !== ''))
+      ((value.category === '교양필수' && value.majorType === '') ||
+        (value.category === '전공필수' && value.majorType !== ''))
     ) {
       setIsComplete(true);
     } else {
@@ -48,36 +61,42 @@ const SearchCourse: React.FC<SearchCourseProps> = ({ value, setArea, setStatus, 
         </thead>
         <tbody>
           <tr className="text-center font-normal text-[#757575]">
-            <td className="w-[180px] border border-black px-4 py-2">
-              {value.courseId || '학수번호'}
-            </td>
-            <td className="w-[240px] border border-black px-4 py-2">
-              {value.courseName || '과목명'}
-            </td>
+            <td className="w-[180px] border border-black px-4 py-2">{value.code || '학수번호'}</td>
+            <td className="w-[240px] border border-black px-4 py-2">{value.name || '과목명'}</td>
 
-            <td className="w-[160px] border border-black px-4 py-2">
-              <select className="rounded px-2 py-1" value={value.area} onChange={handleAreaChange}>
-                <option value="" className="text-center text-[#005BAC]">
+            <td className="w-[160px] border border-black px-4 py-2 font-semibold text-[#005BAC]">
+              <select
+                disabled={!value.code}
+                className="rounded px-2 py-1"
+                value={value.category}
+                onChange={handleCategoryChange}
+              >
+                <option value="" className="text-center">
                   선택하기
                 </option>
                 {areaOptions.map((area) => (
-                  <option key={area} value={area} className="text-center text-[#005BAC]">
+                  <option key={area} value={area} className="text-center">
                     {area}
                   </option>
                 ))}
               </select>
             </td>
 
-            <td className="w-[180px] border border-black px-4 py-2">
-              {value.area === '교양필수' ? (
+            <td className="w-[180px] border border-black px-4 py-2 font-semibold text-[#005BAC]">
+              {value.category === '교양필수' ? (
                 <p>-</p>
               ) : (
-                <select className="rounded px-2 py-1" value={value.status} onChange={setStatus}>
-                  <option value="" className="text-center text-[#005BAC]">
+                <select
+                  disabled={!value.category}
+                  className="rounded px-2 py-1"
+                  value={value.majorType}
+                  onChange={setMajorType}
+                >
+                  <option value="" className="text-center">
                     선택하기
                   </option>
                   {statusOptions.map((status) => (
-                    <option key={status} value={status} className="text-center text-[#005BAC]">
+                    <option key={status} value={status} className="text-center">
                       {status}
                     </option>
                   ))}
@@ -85,7 +104,9 @@ const SearchCourse: React.FC<SearchCourseProps> = ({ value, setArea, setStatus, 
               )}
             </td>
 
-            <td className="w-[120px] border border-black px-4 py-2">{value.credit || '학점'}</td>
+            <td className="w-[120px] border border-black px-4 py-2">
+              {`${value.credit}.0` || '학점'}
+            </td>
 
             <td className="w-[120px] border border-black px-4 py-2">성적</td>
           </tr>

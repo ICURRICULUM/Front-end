@@ -19,7 +19,7 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
         과목 검색하기
       </button>
 
-      <button
+      {/* <button
         onClick={() => setType('direct')}
         className={`px-2 py-5 ${
           type === 'direct'
@@ -28,7 +28,7 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
         }`}
       >
         직접 입력하기
-      </button>
+      </button> */}
     </div>
   );
 };

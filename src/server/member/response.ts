@@ -1,3 +1,15 @@
+export interface GetMemberInfoResponse {
+  result: {
+    name: string;
+    email: string;
+    joinYear: number;
+    majorList: {
+      majorType: string;
+      departmentName: string;
+    }[];
+  };
+}
+
 export interface SignUpResponse {
   result: {
     email: string;
