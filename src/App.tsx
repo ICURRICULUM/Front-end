@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <Suspense>
+    <Suspense fallback={<div>조회중</div>}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>

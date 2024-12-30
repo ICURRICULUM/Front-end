@@ -31,7 +31,7 @@ const Info: React.FC<InfoProps> = ({
         <div className="flex w-[506px] flex-row space-x-2.5 rounded-five border border-black bg-white p-4">
           <p className="text-[#757575]">주전공</p>
           <p>
-            {userProfile.result.majorList.map((item) => (
+            {userProfile?.result.majorList.map((item) => (
               <span>{item.departmentName}</span>
             ))}
           </p>

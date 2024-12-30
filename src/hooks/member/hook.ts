@@ -1,10 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  useMutation,
-  useSuspenseQuery,
-  UseMutationResult,
-  UseSuspenseQueryResult,
-} from '@tanstack/react-query';
+import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
 
 import { useLoggedInStore } from '@zustand/user/store';
 
@@ -13,8 +8,8 @@ import { LoginRequest, SignUpRequest } from '@server/member/request';
 import { LoginResponse, SignUpResponse, GetMemberInfoResponse } from '@server/member/response';
 
 // 회원 정보 조회
-export const useGetMemberInfo = (): UseSuspenseQueryResult<GetMemberInfoResponse> => {
-  return useSuspenseQuery({
+export const useGetMemberInfo = (): UseQueryResult<GetMemberInfoResponse> => {
+  return useQuery({
     queryKey: [`/members/info`],
     queryFn: () => getMemberInfo(),
   });

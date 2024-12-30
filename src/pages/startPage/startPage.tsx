@@ -34,13 +34,17 @@ const StartPage = () => {
 
   const handleLogin = async () => {
     await login({ email, password });
-    setUserProfile(profile.result);
+    if (profile?.result) {
+      setUserProfile(profile.result);
+    }
   };
 
   const handleEnter = async (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       await login({ email, password });
-      setUserProfile(profile.result);
+      if (profile?.result) {
+        setUserProfile(profile.result);
+      }
     }
   };
 

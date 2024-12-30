@@ -24,6 +24,7 @@ const CheckRequirement = () => {
   const resultData = keys.map((item, index) => ({
     id: index,
     title: item.title,
+    // @ts-ignore
     value: checkGradutaionData?.result[item.key],
   }));
 
