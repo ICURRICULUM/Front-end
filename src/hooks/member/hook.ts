@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
 
-import { useLoggedInStore } from '@zustand/user/store';
+import { useLoggedInStore, useUserProfileStore } from '@zustand/user/store';
 
 import { login, signUp, getMemberInfo } from '@server/member/api';
 import { LoginRequest, SignUpRequest } from '@server/member/request';
@@ -34,13 +34,19 @@ export const useLogin = (
   resetStates: () => void,
 ): UseMutationResult<LoginResponse, unknown, LoginRequest> => {
   const { setIsLoggedIn } = useLoggedInStore();
+  const { setUserProfile } = useUserProfileStore();
 
   return useMutation({
     mutationFn: (data: LoginRequest) => login(data),
-    onSuccess: (response: LoginResponse) => {
-      setIsLoggedIn(true);
+    onSuccess: async (response: LoginResponse) => {
       localStorage.setItem('accessToken', response.accessToken);
+
+      const userResponse = await getMemberInfo();
+      setUserProfile(userResponse.result);
+
       resetStates();
+
+      setIsLoggedIn(true);
     },
     onError: () => handleError(true),
   });

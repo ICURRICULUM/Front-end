@@ -36,12 +36,12 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<StartPage />} />
+              <Route path="/join/agree" element={<SignUpPage />} />
+              <Route path="/join/begin" element={<InfoInputPage />} />
+              <Route path="/join/end" element={<CompletePage />} />
 
               {isLoggedIn && (
                 <>
-                  <Route path="/join/agree" element={<SignUpPage />} />
-                  <Route path="/join/begin" element={<InfoInputPage />} />
-                  <Route path="/join/end" element={<CompletePage />} />
                   <Route path="/entercourse" element={<EnterCoursePage />} />
                   <Route path="/update" element={<UpdateMyCoursePage />} />
                   <Route path="/mypage" element={<MyPage />} />
