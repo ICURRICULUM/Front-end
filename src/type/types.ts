@@ -29,7 +29,7 @@ export interface CreateCourseItem {
   category: string;
   credit: number;
   majorType: string;
-  grade: number;
+  grade: number | undefined;
 }
 
 export interface TakeItem {
