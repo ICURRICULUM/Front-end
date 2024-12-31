@@ -29,16 +29,23 @@ const SearchCourse: React.FC<SearchCourseProps> = ({
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e);
-    setMajorType({ target: { value: '' } } as React.ChangeEvent<HTMLSelectElement>);
+    if (e.target.value !== '전공필수' && e.target.value !== '전공선택') {
+      setMajorType({ target: { value: '' } } as React.ChangeEvent<HTMLSelectElement>);
+    }
   };
 
   useEffect(() => {
     if (
-      value.code !== '' &&
-      value.name !== '' &&
-      value.credit !== 0 &&
-      ((value.category === '교양필수' && value.majorType === '') ||
-        (value.category === '전공필수' && value.majorType !== ''))
+      (value.code !== '' &&
+        value.name !== '' &&
+        value.credit !== 0 &&
+        ((value.category === '전공필수' && value.majorType !== '') ||
+          (value.category === '전공선택' && value.majorType !== '') ||
+          (value.category === '교양필수' && value.majorType === '') ||
+          (value.category === '교양선택' && value.majorType === ''))) ||
+      (value.category === 'SW_AI' && value.majorType === '') ||
+      (value.category === '창의' && value.majorType === '') ||
+      (value.category === '핵심교양' && value.majorType === '')
     ) {
       setIsComplete(true);
     } else {
@@ -83,7 +90,7 @@ const SearchCourse: React.FC<SearchCourseProps> = ({
             </td>
 
             <td className="w-[180px] border border-black px-4 py-2 font-semibold text-[#005BAC]">
-              {value.category === '교양필수' ? (
+              {value.category !== '전공필수' && value.category !== '전공선택' ? (
                 <p>-</p>
               ) : (
                 <select

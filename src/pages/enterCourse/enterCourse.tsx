@@ -24,7 +24,7 @@ const EnterCoursePage = () => {
     category: '',
     majorType: '',
     credit: 0,
-    grade: 0,
+    grade: undefined,
   });
 
   const [courseList, setCourseList] = useState<CreateCourseItem[]>([]);
@@ -117,7 +117,7 @@ const EnterCoursePage = () => {
       category: '',
       majorType: '',
       credit: response.result.credit,
-      grade: 0,
+      grade: undefined,
     });
   };
 
@@ -126,21 +126,24 @@ const EnterCoursePage = () => {
 
   // Course List 생성 메서드
   const handleCreate = async () => {
-    await createCourse({
-      takeCreateDTOList: courseList.map((course) => ({
-        ...course,
-        majorType: '주전공',
-      })),
-    });
-    setCourseData({
-      code: '',
-      name: '',
-      category: '',
-      majorType: '',
-      credit: 0,
-      grade: 0,
-    });
-    setCourseList([]);
+    if (courseList.every((item) => item.grade !== undefined)) {
+      await createCourse({
+        //@ts-ignore
+        takeCreateDTOList: courseList.map((course) => ({
+          ...course,
+          majorType: '주전공',
+        })),
+      });
+      setCourseData({
+        code: '',
+        name: '',
+        category: '',
+        majorType: '',
+        credit: 0,
+        grade: undefined,
+      });
+      setCourseList([]);
+    }
   };
 
   // const handleCustomCreate = async () => {
@@ -177,7 +180,7 @@ const EnterCoursePage = () => {
       category: '',
       majorType: '',
       credit: 0,
-      grade: 0,
+      grade: undefined,
     });
     setCourseList([]);
     setPage(0);
