@@ -27,5 +27,13 @@ export const translateGrade = (grade: number) => {
     case 1.0:
     case 1:
       return 'D0';
+
+    case 0.0:
+    case 0:
+      return 'F';
+
+    case -1.0:
+    case -1:
+      return 'P';
   }
 };

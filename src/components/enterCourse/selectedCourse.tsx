@@ -25,12 +25,11 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
     { label: 'C0', value: 2.0 },
     { label: 'D+', value: 1.5 },
     { label: 'D0', value: 1.0 },
-    { label: 'F', value: 0 },
-    { label: 'P', value: 0 },
-    { label: 'NP', value: 0 },
+    { label: 'F', value: 0.0 },
+    { label: 'P', value: -1.0 },
   ];
 
-  const areAllGradesSelected = value.every((item) => item.grade !== 0);
+  const areAllGradesSelected = value.every((item) => item.grade !== undefined);
 
   return (
     <div className="flex flex-col items-center space-y-10">
@@ -84,7 +83,7 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
                     value={item.grade}
                     onChange={(e) => setGrade(index, Number(e.target.value))}
                   >
-                    <option value="">성적 선택</option>
+                    <option value={undefined}>성적 선택</option>
                     {gradeOptions.map((grade, index) => (
                       <option key={index} value={grade.value}>
                         {grade.label}
