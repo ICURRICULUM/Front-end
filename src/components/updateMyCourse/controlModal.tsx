@@ -16,9 +16,11 @@ const ControlModal: React.FC<ControlModalProps> = ({ isVisible, value, closeModa
   const { mutateAsync: updateTakeItem } = useUpdateTakeList(refetchTakeItems);
   const { mutateAsync: deleteTakeItem } = useDeleteTakeList(refetchTakeItems);
 
-  const [category, setCategory] = useState<string>(value?.category || '');
-  const [majorType, setMajorType] = useState<string>(value?.majorType || '');
-  const [grade, setGrade] = useState<number | null>(null);
+  const [courseData, setCourseData] = useState<TakeItem | null>(value);
+
+  useEffect(() => {
+    setCourseData(value);
+  }, [value]);
 
   const categoryOptions: string[] = [
     '전공필수',
@@ -47,48 +49,55 @@ const ControlModal: React.FC<ControlModalProps> = ({ isVisible, value, closeModa
   ];
 
   const handleDelete = async () => {
-    if (value !== null) {
-      await deleteTakeItem({ takeId: value.takeId });
+    if (courseData !== null) {
+      await deleteTakeItem({ takeId: courseData.takeId });
       closeModal();
     }
   };
 
   const handleUpdate = async () => {
-    if (value !== null) {
+    if (courseData !== null) {
       await updateTakeItem({
         takeList: {
-          takeId: value.takeId,
-          code: value.code,
-          name: value.name,
-          category: category,
-          majorType: majorType,
-          grade: grade !== null ? grade : value.grade,
-          credit: value.credit,
+          takeId: courseData.takeId,
+          code: courseData.code,
+          name: courseData.name,
+          category: courseData.category,
+          majorType: courseData.majorType,
+          grade: courseData.grade,
+          credit: courseData.credit,
         },
       });
       closeModal();
     }
   };
 
-  useEffect(() => {
-    if (isVisible) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+  const handleReset = async () => {
+    setCourseData(value);
+    closeModal();
+  };
 
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isVisible]);
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCourseData((prevState) => (prevState ? { ...prevState, category: e.target.value } : null));
+  };
+
+  const handleMajorTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCourseData((prevState) => (prevState ? { ...prevState, majorType: e.target.value } : null));
+  };
+
+  const handleGradeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCourseData((prevState) =>
+      prevState ? { ...prevState, grade: Number(e.target.value) } : null,
+    );
+  };
 
   return (
     isVisible &&
-    value !== null && (
+    courseData !== null && (
       <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-modalBack">
         <div className="relative flex h-[600px] w-[1200px] flex-col items-center space-y-20 border border-black bg-white px-20 py-10">
           <div className="absolute right-4 top-4">
-            <img src={XButton} onClick={closeModal} className="flex cursor-pointer" />
+            <img src={XButton} onClick={handleReset} className="flex cursor-pointer" />
           </div>
 
           <p className="text-2xl font-semibold">수강 이력 수정</p>
@@ -119,9 +128,9 @@ const ControlModal: React.FC<ControlModalProps> = ({ isVisible, value, closeModa
                 </td>
                 <td className="w-[160px] border border-t-0 border-black px-4 py-2">
                   <select
-                    className="rounded px-2 py-1"
-                    value={value.category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    className="rounded px-2 py-1 text-center font-semibold text-[#005BAC]"
+                    value={courseData.category}
+                    onChange={handleCategoryChange}
                   >
                     <option value="" className="text-center">
                       선택하기
@@ -134,14 +143,14 @@ const ControlModal: React.FC<ControlModalProps> = ({ isVisible, value, closeModa
                   </select>
                 </td>
                 <td className="w-[180px] border border-t-0 border-black px-4 py-2">
-                  {value.category === '교양필수' ? (
+                  {courseData.category === '교양필수' ? (
                     <p>-</p>
                   ) : (
                     <select
-                      disabled={!value.category}
-                      className="rounded px-2 py-1"
-                      value={value.majorType}
-                      onChange={(e) => setMajorType(e.target.value)}
+                      disabled={!courseData.category}
+                      className="rounded px-2 py-1 text-center font-semibold text-[#005BAC]"
+                      value={courseData.majorType}
+                      onChange={handleMajorTypeChange}
                     >
                       <option value="" className="text-center">
                         선택하기
@@ -156,14 +165,14 @@ const ControlModal: React.FC<ControlModalProps> = ({ isVisible, value, closeModa
                 </td>
 
                 <td className="w-[120px] border border-t-0 border-black px-4 py-2">
-                  {`${value.credit}.0` || '학점'}
+                  {`${courseData.credit}.0` || '학점'}
                 </td>
 
                 <td className="w-[120px] border border-r-0 border-t-0 border-black px-4 py-2">
                   <select
                     className="rounded px-2 py-1 text-center font-semibold text-[#005BAC]"
-                    value={value.grade}
-                    onChange={(e) => setGrade(Number(e.target.value))}
+                    value={courseData.grade}
+                    onChange={handleGradeChange}
                   >
                     <option value="">성적 선택</option>
                     {gradeOptions.map((grade, index) => (
