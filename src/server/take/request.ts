@@ -9,7 +9,13 @@ interface Take {
 }
 
 export interface UpdateTakeListsRequest {
-  takeList: Take;
+  takeId: number;
+  code: string;
+  name: string;
+  category: string;
+  majorType: string;
+  credit: number;
+  grade: number;
 }
 
 export interface DeleteTakeRequest {

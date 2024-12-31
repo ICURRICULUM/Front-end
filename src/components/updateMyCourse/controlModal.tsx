@@ -58,15 +58,13 @@ const ControlModal: React.FC<ControlModalProps> = ({ isVisible, value, closeModa
   const handleUpdate = async () => {
     if (courseData !== null) {
       await updateTakeItem({
-        takeList: {
-          takeId: courseData.takeId,
-          code: courseData.code,
-          name: courseData.name,
-          category: courseData.category,
-          majorType: courseData.majorType,
-          grade: courseData.grade,
-          credit: courseData.credit,
-        },
+        takeId: courseData.takeId,
+        code: courseData.code,
+        name: courseData.name,
+        category: courseData.category,
+        majorType: courseData.majorType,
+        grade: courseData.grade,
+        credit: courseData.credit,
       });
       closeModal();
     }
