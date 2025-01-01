@@ -27,7 +27,7 @@ export const useUserProfileStore = create<{
   setUserProfile: (newProfile: UserProfile) => void;
 }>((set) => ({
   userProfile: {
-    email: 'jjinh0213@inha.edu',
+    email: '',
     name: '',
     joinYear: 0,
     majorList: [],

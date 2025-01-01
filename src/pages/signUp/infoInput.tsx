@@ -8,13 +8,12 @@ import MajorSelect from '@components/signUp/majorSelect';
 import TextInput from '@components/signUp/infoInput/textInput';
 import AdmissionYearSelect from '@components/signUp/admissionYearSelect';
 
-import { useSignUpStore, useUserProfileStore } from '@zustand/user/store';
+import { useSignUpStore } from '@zustand/user/store';
 
 import PencilIcon from '@assets/signUp/pencil.svg';
 
 const InfoInputPage = () => {
   const { signUpState } = useSignUpStore();
-  const { userProfile } = useUserProfileStore();
 
   const [canNext, setCanNext] = useState<boolean>(false);
 
@@ -65,7 +64,7 @@ const InfoInputPage = () => {
         </header>
 
         <div className="flex flex-col space-y-5">
-          <TextInput title="이메일 주소" placeholderText={userProfile.email} canEdit={false} />
+          <TextInput title="이메일 주소" placeholderText={signUpState.email} canEdit={false} />
 
           <TextInput
             title="이름"
