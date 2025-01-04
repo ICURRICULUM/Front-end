@@ -80,9 +80,23 @@ const EnterCoursePage = () => {
     });
   };
 
+  // 핵심교양의 영역을 저장하기 위한 값
+  const [originalCategory, setOriginalCategory] = useState<string>('');
+
   // 영역 선택 이벤트
   const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCourseData((prev) => ({ ...prev, category: e.target.value }));
+    const selectedCategory = e.target.value;
+
+    if (selectedCategory === '핵심교양') {
+      // 기존 저장된 핵심교양 값으로 복원
+      setCourseData((prev) => ({ ...prev, category: originalCategory }));
+    } else {
+      // 새 값을 업데이트하고, 핵심교양이라면 저장
+      setCourseData((prev) => ({ ...prev, category: selectedCategory }));
+      if (selectedCategory.includes('핵심교양')) {
+        setOriginalCategory(selectedCategory);
+      }
+    }
   };
 
   // 전공 상태 선택 이벤트
@@ -107,14 +121,16 @@ const EnterCoursePage = () => {
 
   // 검색 메서드
   const handleSearch = async (searchInput: string) => {
+    const upperCaseInput = searchInput.toUpperCase();
     setSearchInput('');
+    const response = await search(upperCaseInput);
 
-    const response = await search(searchInput);
+    setOriginalCategory(response.result.category);
 
     setCourseData({
       code: response.result.code,
       name: response.result.name,
-      category: '',
+      category: response.result.category,
       majorType: '',
       credit: response.result.credit,
       grade: undefined,
