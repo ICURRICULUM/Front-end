@@ -45,7 +45,7 @@ const SearchCourse: React.FC<SearchCourseProps> = ({
           (value.category === '교양선택' && value.majorType === ''))) ||
       (value.category === 'SW_AI' && value.majorType === '') ||
       (value.category === '창의' && value.majorType === '') ||
-      (value.category === '핵심교양' && value.majorType === '')
+      (value.category.includes('핵심교양') && value.majorType === '')
     ) {
       setIsComplete(true);
     } else {
@@ -75,7 +75,7 @@ const SearchCourse: React.FC<SearchCourseProps> = ({
               <select
                 disabled={!value.code}
                 className="rounded px-2 py-1"
-                value={value.category}
+                value={value.category.startsWith('핵심교양') ? '핵심교양' : value.category}
                 onChange={handleCategoryChange}
               >
                 <option value="" className="text-center">
