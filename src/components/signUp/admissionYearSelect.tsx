@@ -28,7 +28,7 @@ const AdmissionYearSelect: React.FC<AdmissionYearSelectProps> = ({ setValue, ite
 
   return (
     <div className="w-80">
-      <p className="mb-1">학번</p>
+      <p className="mb-1 text-sm font-semibold">학번</p>
       <div className="relative">
         <div
           className={`flex cursor-pointer flex-row items-center justify-between rounded-five border border-[#757575] p-4 ${
