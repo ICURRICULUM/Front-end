@@ -20,6 +20,8 @@ const Email: React.FC<EmailProps> = ({
   isVerified,
   setIsVerified,
 }) => {
+  const isEmailValid = email.endsWith('@inha.edu');
+
   const [isSended, setIsSended] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -66,7 +68,8 @@ const Email: React.FC<EmailProps> = ({
               onClick={handleSend}
               className={`min-w-40 rounded-[5px] border border-[#005BAC] p-4 text-base font-semibold  ${
                 isVerified ? 'cursor-default bg-white text-[#005BAC]' : 'bg-[#005BAC] text-white'
-              }`}
+              } ${!isEmailValid && 'border-[#757575] bg-[#757575]'}`}
+              disabled={!isEmailValid || isVerified}
             >
               {isVerified ? '메일 인증 완료' : isSended ? '인증메일 재전송' : '인증메일 받기'}
             </button>
