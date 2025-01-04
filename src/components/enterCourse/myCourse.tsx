@@ -71,7 +71,7 @@ const MyCourseComponent: React.FC<MyCourseComponentProps> = ({
                       <td className="w-[180px] border border-[#EEEEEE] px-4 py-2">{course.code}</td>
                       <td className="w-[240px] border border-[#EEEEEE] px-4 py-2">{course.name}</td>
                       <td className="w-[160px] border border-[#EEEEEE] px-4 py-2">
-                        {course.category}
+                        {course.category.includes('핵심교양') ? '핵심교양' : course.category}
                       </td>
                       <td className="w-[180px] border border-[#EEEEEE] px-4 py-2">
                         {course.majorType === null ? '-' : course.majorType}

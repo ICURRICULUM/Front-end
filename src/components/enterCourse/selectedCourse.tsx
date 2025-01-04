@@ -57,7 +57,7 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
                     index !== 0 && 'border-t-0'
                   }`}
                 >
-                  {item.category}
+                  {item.category.includes('핵심교양') ? '핵심교양' : item.category}
                 </td>
                 <td
                   className={`w-[180px] border border-black px-4 py-2 ${
