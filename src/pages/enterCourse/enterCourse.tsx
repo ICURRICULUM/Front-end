@@ -228,6 +228,7 @@ const EnterCoursePage = () => {
           majorType: '주전공',
         })),
       });
+      //@ts-ignore
       setCourses([]);
       setISFileUploadComplete(false);
     }
