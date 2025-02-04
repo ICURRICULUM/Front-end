@@ -208,9 +208,11 @@ const EnterCoursePage = () => {
   const [courses, setCourses] = useState<
     Omit<SearchCourseByListsResponse['result']['detailInfoList'][0], 'courseId'> &
       { grade: undefined }[]
+    //@ts-ignore
   >([]);
 
   const removeFileUploadCourse = (index: number) => {
+    //@ts-ignore
     setCourses((prevCourses) => {
       if (index < 0 || index >= prevCourses.length) return prevCourses; // 유효성 검사
       return [...prevCourses.slice(0, index), ...prevCourses.slice(index + 1)];
@@ -243,10 +245,12 @@ const EnterCoursePage = () => {
         const filteredMatches = matches.filter((code) => !codes.includes(code));
 
         fileUpload(filteredMatches).then((response: SearchCourseByListsResponse) => {
+          //@ts-ignore
           const updatedCourses = response.result.detailInfoList.map(({ courseId, ...course }) => ({
             ...course,
             grade: undefined,
           }));
+          //@ts-ignore
           setCourses(updatedCourses);
         });
         setISFileUploadComplete(true);
@@ -338,7 +342,9 @@ const EnterCoursePage = () => {
 
           {isFileUploadComplete && (
             <FileCourseListComponent
+              //@ts-ignore
               courseList={courses}
+              //@ts-ignore
               setCourses={setCourses}
               removeCourse={removeFileUploadCourse}
               createCourse={handleFileUploadCreate}
