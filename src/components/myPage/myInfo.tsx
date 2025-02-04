@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import PencilIcon from '@assets/myPage/pencil.svg';
-
 interface MyInfoProps {
   myInfoData: {
     name: string;
@@ -19,7 +17,6 @@ const MyInfo: React.FC<MyInfoProps> = ({ myInfoData }) => {
     <div className="flex w-full flex-col space-y-10 rounded-five border border-black p-10">
       <div className="flex flex-row justify-between">
         <p className="text-2xl font-semibold">내 정보</p>
-        {/* <img src={PencilIcon} className="cursor-pointer" /> */}
       </div>
 
       <div className="flex flex-row space-x-10">
@@ -35,8 +32,9 @@ const MyInfo: React.FC<MyInfoProps> = ({ myInfoData }) => {
           <p>{myInfoData.name || '이름'}</p>
           <p>{myInfoData.joinYear}학번</p>
           <p>
-            {myInfoData.majorList.map((item) => <span>{item.departmentName}</span>) ||
-              '컴퓨터공학과'}
+            {myInfoData.majorList.map((item, index) => (
+              <span key={index}>{item.departmentName}</span>
+            )) || '컴퓨터공학과'}
           </p>
           {/* <p>{myInfoData.doubleMajor.join(', ')}</p> */}
           <p>{myInfoData.email}</p>

@@ -21,3 +21,10 @@ export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface ChangePasswordResponse {
+  result: {
+    email: string;
+    join_date: string;
+  };
+}

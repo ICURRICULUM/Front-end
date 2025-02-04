@@ -22,8 +22,10 @@ interface SmallStatusProps {
 const SmallStatus: React.FC<SmallStatusProps> = ({ isOpened, handleOpen, title, value }) => {
   const [isCheckModalOpen, setIsCheckModalOpen] = useState<boolean>(false);
 
-  const percentage =
-    value.requiredCredit !== 0 ? (value.completedCredit / value.requiredCredit) * 100 : 100;
+  const percentage = Math.min(
+    value.requiredCredit !== 0 ? (value.completedCredit / value.requiredCredit) * 100 : 100,
+    100,
+  );
 
   const getUncompletedData = () => {
     if ('uncompletedArea' in value && value.uncompletedArea?.length > 0) {

@@ -1,18 +1,33 @@
 import React from 'react';
-import { CreateCourseItem } from '@type/types';
 
 import DeleteIcon from '@assets/enterCourse/delete.svg';
 
-interface CourseComponetProps {
-  value: CreateCourseItem[];
-  setGrade: (index: number, grade: number | undefined) => void;
+interface FileCourseListComponentProps {
+  courseList: {
+    name: string;
+    credit: number;
+    code: string;
+    category: string;
+    grade: number | undefined;
+  }[];
+  setCourses: React.Dispatch<
+    React.SetStateAction<
+      {
+        name: string;
+        credit: number;
+        code: string;
+        category: string;
+        grade: number | undefined;
+      }[]
+    >
+  >;
   removeCourse: (index: number) => void;
   createCourse: () => void;
 }
 
-const SelectedCourse: React.FC<CourseComponetProps> = ({
-  value,
-  setGrade,
+const FileCourseListComponent: React.FC<FileCourseListComponentProps> = ({
+  courseList,
+  setCourses,
   removeCourse,
   createCourse,
 }) => {
@@ -29,13 +44,19 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
     { label: 'P', value: -1.0 },
   ];
 
-  const areAllGradesSelected = value.every((item) => item.grade !== undefined);
+  const setGrade = (index: number, newGrade: number | undefined) => {
+    setCourses((prevCourses) =>
+      prevCourses.map((course, i) => (i === index ? { ...course, grade: newGrade } : course)),
+    );
+  };
+
+  const areAllGradesSelected = courseList.every((item) => item.grade !== undefined);
 
   return (
     <div className="flex flex-col items-center space-y-10">
       <div className="flex flex-row">
         <table className="relative w-[1000px] table-fixed border-collapse rounded-five">
-          {value.map((item, index) => (
+          {courseList.map((item, index) => (
             <tbody key={index} className="relative">
               <tr key={index} className="text-center font-normal text-[#757575]">
                 <td
@@ -64,14 +85,14 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
                     index !== 0 && 'border-t-0'
                   }`}
                 >
-                  {item.majorType || '-'}
+                  {item.category === '전공필수' || item.category === '전공선택' ? '주전공' : '-'}
                 </td>
                 <td
                   className={`w-[120px] border border-black px-4 py-2 ${
                     index !== 0 && 'border-t-0'
                   }`}
                 >
-                  {item.credit}
+                  {item.credit}.0
                 </td>
                 <td
                   className={`w-[120px] border border-black px-4 py-2 ${
@@ -80,7 +101,7 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
                 >
                   <select
                     className="rounded px-2 py-1 text-center font-semibold text-[#005BAC]"
-                    value={item.grade}
+                    value={item.grade ?? ''}
                     onChange={(e) =>
                       setGrade(index, e.target.value === '' ? undefined : Number(e.target.value))
                     }
@@ -110,7 +131,7 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
       </div>
 
       <button
-        onClick={createCourse}
+        onClick={() => createCourse()}
         disabled={!areAllGradesSelected}
         className={`rounded-five border border-[#005bac] p-4 font-semibold  ${
           areAllGradesSelected ? 'bg-[#005bac] text-white' : 'bg-white  text-[#005bac]'
@@ -122,4 +143,4 @@ const SelectedCourse: React.FC<CourseComponetProps> = ({
   );
 };
 
-export default SelectedCourse;
+export default FileCourseListComponent;

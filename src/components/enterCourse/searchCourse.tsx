@@ -35,18 +35,7 @@ const SearchCourse: React.FC<SearchCourseProps> = ({
   };
 
   useEffect(() => {
-    if (
-      (value.code !== '' &&
-        value.name !== '' &&
-        value.credit !== 0 &&
-        ((value.category === '전공필수' && value.majorType !== '') ||
-          (value.category === '전공선택' && value.majorType !== '') ||
-          (value.category === '교양필수' && value.majorType === '') ||
-          (value.category === '교양선택' && value.majorType === ''))) ||
-      (value.category === 'SW_AI' && value.majorType === '') ||
-      (value.category === '창의' && value.majorType === '') ||
-      (value.category.includes('핵심교양') && value.majorType === '')
-    ) {
+    if (value.code !== '' && value.name !== '' && value.credit !== 0 && value.category !== '') {
       setIsComplete(true);
     } else {
       setIsComplete(false);

@@ -9,7 +9,7 @@ interface LargeStatusProps {
 }
 
 const LargeStatus: React.FC<LargeStatusProps> = ({ title, value }) => {
-  const percentage = (value.totalCompletedCredit / value.totalNeedCredit) * 100;
+  const percentage = Math.min((value.totalCompletedCredit / value.totalNeedCredit) * 100, 100);
 
   return (
     <div className="rounded-five border border-black bg-white p-4">

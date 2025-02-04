@@ -10,3 +10,9 @@ export interface SendMailResponse {
     email: string;
   };
 }
+
+export interface SendTemporaryPasswordResponse {
+  result: {
+    email: string;
+  };
+}

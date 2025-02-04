@@ -29,6 +29,17 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
       >
         직접 입력하기
       </button> */}
+
+      <button
+        onClick={() => setType('file')}
+        className={`px-2 py-5 ${
+          type === 'file'
+            ? 'border-b-4 border-b-[#005BAC] font-semibold text-[#005BAC]'
+            : 'border-b-0 text-[#757575]'
+        }`}
+      >
+        파일 업로드하기
+      </button>
     </div>
   );
 };

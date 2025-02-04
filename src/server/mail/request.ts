@@ -6,3 +6,7 @@ export interface VerifyMailRequest {
 export interface SendMailRequest {
   email: string;
 }
+
+export interface SendTemporaryPasswordRequest {
+  email: string;
+}

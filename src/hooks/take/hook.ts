@@ -28,6 +28,13 @@ export const useGetTakeLists = (
   });
 };
 
+export const useGetTakeListCodes = (): UseSuspenseQueryResult<GetTakeListsResponse> => {
+  return useSuspenseQuery({
+    queryKey: [`/take/all`],
+    queryFn: () => getTakeLists(0, 999),
+  });
+};
+
 export const useUpdateTakeList = (
   refetch: () => void,
 ): UseMutationResult<UpdateTakeListsResponse, unknown, UpdateTakeListsRequest> => {
@@ -52,5 +59,6 @@ export const useCreateTakeLists = (
   return useMutation({
     mutationFn: (data: CreateTakeListsRequest) => createTakeLists(data),
     onSuccess: () => refetch(),
+    onError: (error: any) => console.log(error),
   });
 };
