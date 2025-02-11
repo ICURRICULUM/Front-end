@@ -5,7 +5,10 @@ export interface GetMemberInfoResponse {
     joinYear: number;
     majorList: {
       majorType: string;
-      departmentName: string;
+      departmentInfoDTO: {
+        name: string;
+        departmentId: number;
+      };
     }[];
   };
 }

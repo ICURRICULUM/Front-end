@@ -37,6 +37,18 @@ const Header = () => {
       )}
 
       <div className="flex">
+        <button
+          className="px-6 py-7 text-xl font-semibold hover:text-[#005BAC]"
+          onClick={() =>
+            window.open(
+              'https://docs.google.com/forms/d/e/1FAIpQLSfsVjVEV1jY-d19ndbGtJADQpjfbdDYRq-cqkkZvpXsODwJCg/viewform',
+              '_blank',
+            )
+          }
+        >
+          피드백하기
+        </button>
+
         <Link
           to="/requirement"
           onClick={handleLinkClick('/requirement')}

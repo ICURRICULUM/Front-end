@@ -32,7 +32,7 @@ const Info: React.FC<InfoProps> = ({
           <p className="text-[#757575]">주전공</p>
           <p>
             {userProfile?.result.majorList.map((item) => (
-              <span>{item.departmentName}</span>
+              <span className="font-semibold">{item.departmentInfoDTO.name}</span>
             ))}
           </p>
         </div>
@@ -44,7 +44,7 @@ const Info: React.FC<InfoProps> = ({
 
       <div className="flex flex-row space-x-4">
         <div className="flex h-[118px] w-[245px] flex-col items-center justify-center space-y-2 rounded-five border border-black bg-white">
-          <p>졸업이수학점</p>
+          <p className="font-semibold">졸업이수학점</p>
           <p className="flex flex-row items-center space-x-1 text-[#757575]">
             <span
               className={`text-2xl font-semibold ${
@@ -58,7 +58,7 @@ const Info: React.FC<InfoProps> = ({
         </div>
 
         <div className="flex h-[118px] w-[245px] flex-col items-center justify-center space-y-2 rounded-five border border-black bg-white">
-          <p>전공이수학점</p>
+          <p className="font-semibold">전공이수학점</p>
           <p className="flex flex-row items-center space-x-1 text-[#757575]">
             <span
               className={`text-2xl font-semibold ${

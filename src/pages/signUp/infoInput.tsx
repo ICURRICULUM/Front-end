@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSignUp } from '@hooks/member/hook';
 
-import { majorItem, joinYearItem } from './itemData';
+import { joinYearItem } from './itemData';
 
 import StepItem from '@components/common/stepComponent';
 import MajorSelect from '@components/signUp/majorSelect';
@@ -76,7 +76,7 @@ const InfoInputPage = () => {
 
           <AdmissionYearSelect setValue={handleJoinYear} itemList={joinYearItem} />
 
-          <MajorSelect setValue={handleMajor} itemList={majorItem} />
+          <MajorSelect setValue={handleMajor} />
         </div>
 
         <button

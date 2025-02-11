@@ -37,6 +37,8 @@ const StartPage = () => {
     }
   };
 
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   return (
     <div
       className="flex h-screen w-screen flex-row items-center justify-end bg-cover bg-no-repeat"
@@ -52,8 +54,8 @@ const StartPage = () => {
           학교 이메일로 로그인해주세요
         </div>
         <div
-          className={`mb-4 flex flex-row items-center space-x-2 rounded-[5px] border p-4 ${
-            isError ? 'border-[#D32F2F]' : 'border-[#757575]'
+          className={`mb-4 flex flex-row items-center space-x-2 rounded-[5px] border-2 p-4 ${
+            isError ? 'border-[#D32F2F]' : isFocused ? ' border-[#005BAC]' : 'border-[#757575]'
           }`}
         >
           <input
@@ -61,7 +63,9 @@ const StartPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             type="text"
             placeholder="학교 이메일 주소(@inha.edu)"
-            className="flex-1"
+            className="flex-1 focus:outline-none"
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
           <p className="font-semibold">@inha.edu</p>
         </div>
@@ -72,7 +76,7 @@ const StartPage = () => {
           onKeyDown={handleEnter}
           type="password"
           placeholder="비밀번호"
-          className={`mb-2 rounded-[5px] border p-4 ${
+          className={`mb-2 rounded-[5px] border-2 p-4 ${
             isError ? 'border-[#D32F2F]' : 'border-[#757575]'
           }`}
         />

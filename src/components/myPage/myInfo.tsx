@@ -7,7 +7,10 @@ interface MyInfoProps {
     joinYear: number;
     majorList: {
       majorType: string;
-      departmentName: string;
+      departmentInfoDTO: {
+        name: string;
+        departmentId: number;
+      };
     }[];
   };
 }
@@ -33,8 +36,8 @@ const MyInfo: React.FC<MyInfoProps> = ({ myInfoData }) => {
           <p>{myInfoData.joinYear}학번</p>
           <p>
             {myInfoData.majorList.map((item, index) => (
-              <span key={index}>{item.departmentName}</span>
-            )) || '컴퓨터공학과'}
+              <span key={index}>{item.departmentInfoDTO.name}</span>
+            ))}
           </p>
           {/* <p>{myInfoData.doubleMajor.join(', ')}</p> */}
           <p>{myInfoData.email}</p>

@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
+import { useGetDepartmentList } from '@hooks/department/department';
 
 import UpArrow from '@assets/signUp/upArrow.svg';
 import DownArrow from '@assets/signUp/downArrow.svg';
 
 interface Item {
-  id: number;
-  value: number;
+  departmentId: number;
   name: string;
 }
 
 interface MajorSelectProps {
   setValue: (value: number) => void;
-  itemList: Item[];
 }
 
-const MajorSelect: React.FC<MajorSelectProps> = ({ setValue, itemList }) => {
+const MajorSelect: React.FC<MajorSelectProps> = ({ setValue }) => {
+  const { data } = useGetDepartmentList();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [displayMajor, setDisplayMajor] = useState<string>('');
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleValue = (item: Item) => {
-    setValue(item.value);
+    setValue(item.departmentId);
     setDisplayMajor(item.name);
     setIsOpen(false);
   };
@@ -43,9 +44,9 @@ const MajorSelect: React.FC<MajorSelectProps> = ({ setValue, itemList }) => {
         </div>
         {isOpen && (
           <div className="absolute w-full rounded-five border border-[#757575] bg-white">
-            {itemList.map((item, index) => (
+            {data.result.departmentInfoDTOList.map((item) => (
               <div
-                key={index}
+                key={item.departmentId}
                 onClick={() => handleValue(item)}
                 className="z-50 cursor-pointer border border-[#EEEEEE] p-4 text-[#757575] hover:bg-[#00AFEC] hover:text-white"
               >
