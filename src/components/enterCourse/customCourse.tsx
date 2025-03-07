@@ -40,6 +40,10 @@ const CustomCourse: React.FC<DirectCourseProps> = ({ value, setValue, createCour
 
   const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue((prev) => ({ ...prev, category: e.target.value }));
+
+    if (e.target.value !== '전공선택' && e.target.value !== '전공필수') {
+      setValue((prev) => ({ ...prev, majorType: '주전공' }));
+    }
   };
 
   const handleMajorType = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -91,6 +95,7 @@ const CustomCourse: React.FC<DirectCourseProps> = ({ value, setValue, createCour
                 placeholder="과목명을 입력하세요."
                 className="w-full text-center font-semibold text-[#005BAC] placeholder:text-center focus:text-left"
                 onChange={handleName}
+                value={value.name}
               />
             </td>
 
@@ -139,13 +144,14 @@ const CustomCourse: React.FC<DirectCourseProps> = ({ value, setValue, createCour
                 placeholder="학점 입력"
                 className="w-full text-center font-semibold text-[#005BAC]"
                 onChange={handleCredit}
+                value={value.credit === 0 ? '' : value.credit}
               />
             </td>
 
             <td className={`w-[120px] border border-black px-4 py-2`}>
               <select
                 className="rounded px-2 py-1 text-center font-semibold text-[#005BAC]"
-                value={value.grade}
+                value={value.grade ?? ''}
                 onChange={handleGrade}
               >
                 <option value={''}>성적 선택</option>
@@ -161,7 +167,10 @@ const CustomCourse: React.FC<DirectCourseProps> = ({ value, setValue, createCour
       </table>
 
       <button
-        onClick={createCourse}
+        onClick={() => {
+          createCourse();
+          setIsComplete(false);
+        }}
         disabled={!isComplete}
         className={`rounded-five border border-[#005bac] p-4 font-semibold  ${
           isComplete ? 'bg-[#005bac] text-white' : 'bg-white  text-[#005bac]'

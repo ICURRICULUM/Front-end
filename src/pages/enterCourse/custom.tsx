@@ -15,11 +15,7 @@ const CustomPage = () => {
     grade: undefined,
   });
 
-  const { refetch } = useGetTakeLists(0, 15);
-  const { mutateAsync: createCourse, isPending } = useCreateTakeLists(refetch);
-
-  const create = async () => {
-    await createCourse({ takeCreateDTOList: [courseData] });
+  const handleReset = () => {
     setCourseData({
       code: 'CUSTOM',
       name: '',
@@ -28,6 +24,13 @@ const CustomPage = () => {
       credit: 0,
       grade: undefined,
     });
+  };
+
+  const { refetch } = useGetTakeLists(0, 15);
+  const { mutateAsync: createCourse, isPending } = useCreateTakeLists(refetch, handleReset);
+
+  const create = async () => {
+    await createCourse({ takeCreateDTOList: [courseData] });
   };
 
   return (

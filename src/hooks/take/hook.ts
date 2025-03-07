@@ -55,10 +55,16 @@ export const useDeleteTakeList = (
 
 export const useCreateTakeLists = (
   refetch: () => void,
+  resetValue?: () => void,
 ): UseMutationResult<CreateTakeListsResponse, unknown, CreateTakeListsRequest> => {
   return useMutation({
     mutationFn: (data: CreateTakeListsRequest) => createTakeLists(data),
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      if (resetValue) {
+        resetValue();
+      }
+    },
     onError: (error: any) => console.log(error),
   });
 };
