@@ -46,7 +46,7 @@ export const useLogin = (
   return useMutation({
     mutationFn: (data: LoginRequest) => login(data),
     onSuccess: async (response: LoginResponse) => {
-      localStorage.setItem('accessToken', response.accessToken);
+      sessionStorage.setItem('accessToken', response.accessToken);
 
       const userResponse = await getMemberInfo();
       setUserProfile(userResponse.result);

@@ -11,6 +11,8 @@ import CompletePage from '@pages/signUp/complete';
 import StartPage from '@pages/startPage/startPage';
 import InfoInputPage from '@pages/signUp/infoInput';
 import NotFoundPage from '@pages/notFound/notFound';
+import SearchCoursePage from '@pages/enterCourse/search';
+import FileUploadPage from '@pages/enterCourse/fileUpload';
 import EnterCoursePage from '@pages/enterCourse/enterCourse';
 import FindPasswordPage from '@pages/findPassword/findPassword';
 import ResetPasswordPage from '@pages/resetPassword/resetPassword';
@@ -27,7 +29,7 @@ function App() {
   const { isLoggedIn, setIsLoggedIn } = useLoggedInStore();
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
+    if (sessionStorage.getItem('accessToken')) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -51,6 +53,8 @@ function App() {
                   <Route path="/requirement" element={<CheckRequirement />} />
 
                   <Route path="/entercourse" element={<EnterCoursePage />} />
+                  <Route path="/entercourse/search" element={<SearchCoursePage />} />
+                  <Route path="/entercourse/file" element={<FileUploadPage />} />
                   <Route path="/update" element={<UpdateMyCoursePage />} />
 
                   <Route path="/mypage" element={<MyPage />} />

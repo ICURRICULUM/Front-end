@@ -1,4 +1,5 @@
 import React from 'react';
+import { CreateCourseItem } from '@type/types';
 
 import DeleteIcon from '@assets/enterCourse/delete.svg';
 
@@ -10,17 +11,7 @@ interface FileCourseListComponentProps {
     category: string;
     grade: number | undefined;
   }[];
-  setCourses: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        credit: number;
-        code: string;
-        category: string;
-        grade: number | undefined;
-      }[]
-    >
-  >;
+  setCourses: React.Dispatch<React.SetStateAction<CreateCourseItem[]>>;
   removeCourse: (index: number) => void;
   createCourse: () => void;
 }

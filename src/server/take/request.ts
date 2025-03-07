@@ -1,12 +1,12 @@
-interface Take {
-  takeId: number;
-  code: string;
-  name: string;
-  category: string;
-  majorType: string;
-  grade: number;
-  credit: number;
-}
+// interface Take {
+//   takeId: number;
+//   code: string;
+//   name: string;
+//   category: string;
+//   majorType: string;
+//   grade: number;
+//   credit: number;
+// }
 
 export interface UpdateTakeListsRequest {
   takeId: number;
@@ -23,5 +23,12 @@ export interface DeleteTakeRequest {
 }
 
 export interface CreateTakeListsRequest {
-  takeCreateDTOList: Omit<Take, 'takeId'>[];
+  takeCreateDTOList: {
+    code: string;
+    name: string;
+    category: string;
+    majorType: string;
+    grade: number | undefined;
+    credit: number;
+  }[];
 }

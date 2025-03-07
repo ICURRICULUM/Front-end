@@ -19,16 +19,16 @@ const NavBar: React.FC<NavBarProps> = ({ type, setType }) => {
         과목 검색하기
       </button>
 
-      {/* <button
-        onClick={() => setType('direct')}
+      <button
+        onClick={() => setType('custom')}
         className={`px-2 py-5 ${
-          type === 'direct'
+          type === 'custom'
             ? 'border-b-4 border-b-[#005BAC] font-semibold text-[#005BAC]'
             : 'border-b-0 text-[#757575]'
         }`}
       >
         직접 입력하기
-      </button> */}
+      </button>
 
       <button
         onClick={() => setType('file')}

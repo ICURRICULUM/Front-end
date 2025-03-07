@@ -41,12 +41,17 @@ const StartPage = () => {
 
   return (
     <div
-      className="flex h-screen w-screen flex-row items-center justify-end bg-cover bg-no-repeat"
+      className="relative flex h-screen w-screen flex-row items-center justify-end bg-cover bg-no-repeat"
       style={{
         backgroundImage: `url(${Background})`,
       }}
     >
       {isPending && <LoadingComponent />}
+
+      <button
+        onClick={() => alert('이승철 현토에버 ㅊㅊㅊㅊ')}
+        className="absolute left-1/3 top-1/2 h-4 w-4 bg-transparent"
+      />
 
       <div className="flex h-full w-[480px] flex-col overflow-y-scroll bg-white px-20 pt-40">
         <img className="mb-8 w-fit" src={Logo} alt="Inha Logo" />
